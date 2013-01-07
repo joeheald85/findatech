@@ -28,7 +28,7 @@
 				</li>
 					
 				<% if user_signed_in? %>
-					<li><%= link_to "Profile", edit_user_registration_url %></li>
+					<li><%= link_to "Profile", settings_users_path %></li>
 					<li><%= link_to "Logout", destroy_user_session_path, :method => 'delete' %></li>
 				<% end %>
 			</ul>

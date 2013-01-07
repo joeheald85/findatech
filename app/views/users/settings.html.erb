@@ -1,49 +1,48 @@
-<%= render 'users/shared/user_sidebar' %>
+<h2>Settings</h2>
 
-
-<% if @fb_connect_error%>
-	<%= content_tag :p, "Facebook Connect - you can only connect one account at a time.", :class => "alert alert-error flash_fb" %>
-<% end %>
-
-<%= form_for @user, :remote => true, :format => :json, :html => { :class => 'form-settings' } do |f| %>
+<%= form_for @user, :validate => true do |f| %>
     <% flash.each do |name, msg| %>
         <%= content_tag :p, msg, :class => "alert alert-error flash_#{name}" if msg.length > 0 %>
     <% end %>
-    <div id="form_notification"><div class="container"></div></div>
-    <div id="profile_accordion">
-        
-        <h3>Profile Details</h3>
-        <div>
-            <%= render 'users/shared/settings/profile_details', :f => f %>
-        </div>
 
-        <h3>Wurqout Preferences</h3>
-        <div>
-            <%= render 'users/shared/settings/wurqout_preferences', :f => f %>
-        </div>
-    
-        <h3>Vital Information</h3>
-        <div>
-            <%= render 'users/shared/settings/vital_information', :f => f %>
-        </div>
-    
-        <h3>Account Settings</h3>
-        <div>
-            <%= render 'users/shared/settings/account_settings', :f => f %>
-        </div>
-        <% if @user.role?('guru') %>
-            <h3<%= raw ' data-loadme="true"' if params[:page] || params[:sort] %>>Testimonials and Promotion</h3>
-            <div>
-                <%= render 'users/shared/settings/testimonials', :f => f %>
-            </div>
+    <p><%= f.label :email %><br>
+    <%= f.email_field :email %></p>
 
-            <h3<%= raw ' data-loadme="true"' if params[:billing] %>>Payments and Billing Info</h3>
-            <div>
-               <%= render 'users/shared/settings/billing_payments', :f => f %>
-            </div>
-        <% end %>
+    <p><%= f.label :full_name %><br>
+    <%= f.text_field :full_name %></p>
+
+    <p><%= f.label :username %><br>
+    <%= f.text_field :username %></p>
+
+    <p><%= f.label :city %><br>
+    <%= f.text_field :city %></p>
+
+    <p><%= f.label :state %><br>
+    <%= f.text_field :state %></p>
+
+    <p><%= f.label :zip %><br>
+    <%= f.text_field :zip %></p>
+    
+    <p><%= f.label :timezone %><br>
+    <%= f.collection_select :timezone, ActiveSupport::TimeZone.us_zones, :name, :to_s %></p>
+    
+    <% if @user.role?('tech')%>
+      <p><%= f.label :rate, "Hourly Rate $" %>
+      <%= f.text_field :rate %></p>
+      
+      <p><%= f.label :distance, "Preferred Distance to Travel" %>
+      <%= f.select :distance, options_for_select([['Miles', 0], ['10', 10], ['20', 20], ['30', 30], ['50', 50], ['100', 100]]) %> Miles</p>
+    <% end %>
+
+	<p><%= f.label :profile_picture %><br>
+    <%= f.file_field :profile_picture %></p>
+
+	<% if @user.profile_picture.present? %>
+		<p>Current Profile Picture: <br>
+			<%= image_tag @user.profile_picture.url(:medium) %></p>
+	<% end %>
+
+    <div class="submit">
+        <%= f.submit "Save", :class => "btn" %>
     </div>
-
-    <%= load_interests(f, :user_interests) %>
-
 <% end %>

@@ -16,6 +16,10 @@
 	<%end%>
 	<div id="content" class="xgrid">
 	
+		<% flash.each do |name, msg| %>
+            <%= content_tag :p, msg, :class => "alert alert-error flash_#{name}" if msg.length > 0 %>
+        <% end %>
+	
 	<%= yield %>
 	
 	</div>

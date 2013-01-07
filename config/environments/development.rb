@@ -37,4 +37,7 @@ Findatech::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  #paperclip path
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 end

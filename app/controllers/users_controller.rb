@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       format.json { render :json => @user }
-      format.html
+      format.html { render :layout => 'home'}
     end
   end
 
@@ -44,13 +44,9 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     if @user.update_attributes(params[:user])
       sign_in(@user, :bypass => true)
-      respond_to do |format|
-        format.json { render :json => @user }
-      end
+      redirect_to dashboard_users_path, :notice => 'Settings updated successfully!'
     else
-      respond_to do |format|
-        format.json { render :json => {:errors => @user.errors.full_messages} }
-      end
+      render 'settings'
     end
   end
 
