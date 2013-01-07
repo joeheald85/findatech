@@ -1,0 +1,8 @@
+<p>
+    <% user.friends.each do |friend| %>
+        <%= link_to image_tag(friend.profile_picture.url(:thumb)), user_profile_path(friend), :class => 'avatar', :rel => 'tooltip', :title => friend.member_name || friend.username %>
+    <% end %>
+</p>
+<% if user.friends.present? %>
+    <p><%= link_to 'View entire netwurq &raquo;'.html_safe, user_netwurq_path(user), :class => 'blue' %></p>
+<% end %>

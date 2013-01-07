@@ -1,0 +1,22 @@
+<% content_for :left_sidebar do %>
+    <div class="widget-title"><h3 class="green">Your Profile</h3></div>
+    <div class="widget">
+        <div class="widget-profile-photo user-photo-progress">
+            <%= image_tag current_user.profile_picture.url(:large)  %>
+        </div>
+    </div>
+
+    <% if current_user.role?('guru') %>
+        <%= render 'users/shared/widgets/rates', :user => current_user %>
+    <% end %>
+
+    <div class="widget-title"><h3 class="green">Your Awards</h3></div>
+    <div class="widget widget-awards">
+        <%= render 'users/shared/widgets/awards' %>
+    </div>
+
+    <div class="widget-title"><h3 class="green">Your Netwurq</h3></div>
+    <div class="widget">
+        <%= render 'users/shared/widgets/netwurq', :user => current_user %>
+    </div>
+<% end %>

@@ -1,0 +1,67 @@
+<%= label_tag nil, 'Testimonials', :class => "big" %>
+<p class="help"><em>Testimonials will be shown on your profile, newest first.</em></p>
+<div id="new-testimonial" class="form-testimonial">
+    <ul class="split split2 unstyled">
+        <li>
+            <div class="control-group">
+                <%= label_tag 'testimonial[name][new]', 'Name' %>
+                <%= text_field_tag 'testimonial[name][new]', nil, :class => 'testimonial-name', :id => 'testimonial_name_new' %>
+            </div>
+        </li>
+        <li>
+            <div class="control-group">
+                <%= label_tag 'testimonial[date][new]', 'Date' %>
+                <%= text_field_tag 'testimonial[date][new]', nil, :class => 'testimonial-date', :id => 'testimonial_date_new' %>
+            </div>
+        </li>
+    </ul>
+    <div class="control-group">
+        <%= label_tag 'testimonial[body][new]', 'Testimonial' %>
+        <%= text_area_tag 'testimonial[body][new]', nil, :class => 'testimonial-body', :id => 'testimonial_body_new' %>
+    </div>
+    <%= button_tag 'Submit', :type => 'button', :class => 'btn add-testimonial' %>
+</div>
+<p><span>Order By <select class="testimonial_sort"><option value="0">Newest</option><option value="1"<%= params[:sort].to_i == 1 ? ' selected' : ''%>>Oldest</option></select></span></p>
+<table class="table table-testimonials">
+    <thead>
+        <tr>
+            <th>Testimonial</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @testimonials.each_with_index do |testimonial, index| %>
+            <tr data-id="<%= testimonial.id %>" class="form-testimonial">
+                <td>
+                    <div class="view">
+                        <p class="meta">
+                            <span class="name"><%= testimonial.name %></span> <%= testimonial.date.strftime('%m/%d/%Y') if testimonial.date %>
+                        </p>
+                        <%= testimonial.body %>
+                    </div>
+                    <div class="edit hide">
+                        <div class="control-group">
+                            <%= label_tag 'testimonial[name]', 'Name' %>
+                            <%= text_field_tag 'testimonial[name]', testimonial.name, :class => 'testimonial-name', :id => 'testimonial_name_'+testimonial.id.to_s %>
+                        </div>
+                        <div class="control-group">
+                            <%= label_tag 'testimonial[date]', 'Date' %>
+                            <%= text_field_tag 'testimonial[date]', testimonial.date, :class => 'testimonial-date', :id => 'testimonial_date_'+testimonial.id.to_s %>
+                        </div>
+                        <div class="control-group">
+                            <%= label_tag 'testimonial[body]', 'Testimonial' %>
+                            <%= text_area_tag 'testimonial[body]', testimonial.body, :class => 'testimonial-body', :id => 'testimonial_body_'+testimonial.id.to_s %>
+                        </div>
+                    </div>
+                </td>
+                <td class="actions">
+                    <%= button_tag 'Edit', :type => 'button', :class => 'btn btn-mini edit-testimonial' %>
+                    <%= link_to '<i class="icon-remove"></i>'.html_safe, testimonial_url(testimonial), :remote => true, :method => :delete, :class => 'btn btn-mini delete-testimonial' %>
+                    <%= button_tag 'Save', :type => 'button', :class => 'btn btn-mini save-testimonial hide', "data-url" => '/testimonials/'+testimonial.id.to_s %>
+                    <%= button_tag 'Cancel', :type => 'button', :class => 'btn btn-mini cancel-testimonial hide' %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<%= will_paginate @testimonials, :renderer => BootstrapPagination::Rails %>

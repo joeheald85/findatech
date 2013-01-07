@@ -1,0 +1,106 @@
+<p class="help">
+    <% if @user.role?('guru') %>
+        <em>Profile details are kept private. Only your name is shown unless you make more public. It is recommended that you make as much of your profile information public to better assist wurqers with finding you.</em>
+    <% else %>
+        <em>Profile details are kept private. Only your first name is shown unless you make more public.</em>
+    <% end %>
+</p>
+
+<div class="control-group">
+    <%= f.label :member_name, "Your Name", :class => "big" %>
+    <div class="push">
+        <%= f.text_field :member_name, :class => 'autosave' %>
+    </div>
+</div>
+
+<div class="control-group">
+    <%= f.label :profile_picture, "Your Photo"+(@user.role?('guru') ? " and Video" : ""), :class => "big" %>
+    <ul id="user_photo_video" class="unstyled">
+        <li class="photo">
+            <div class="user-photo-progress">
+                <%= image_tag @user.profile_picture.url(:medium) %>
+            </div>
+            <button class="btn">
+                Update Photo<%= f.file_field :profile_picture, "data-url" => user_change_photo_path(current_user.id) %>
+            </button>
+            <button type="button" class="btn" id="user_profile_picture_remove" data-user="<%= current_user.id %>">Delete Photo</button>
+        </li>
+        <% if @user.role?('guru') %>
+        <li class="video">
+            <div class="user-video-preview">
+                
+            </div>
+            <div class="link controls">
+                <div class="input-append">
+                    <%= f.text_field :guru_video_link, :placeholder => 'YouTube or Vimeo link' %>
+                    <span class="add-on" rel="tooltip" title="YouTube or Vimeo only"><i class="icon-question-sign"></i></span>
+                </div>
+                <div class="error"><i></i><label class="message">invalid video url</label></div>
+            </div>
+        </li>
+        <% end %>
+    </ul>
+</div>
+
+<div class="control-group">
+    <%= label_tag nil, 'Your Gender', :class => "big" %>
+    <div class="push">
+        <%= f.label :gender, :class => 'radio inline' do %>
+            <%= f.radio_button :gender, 'male', :class => 'autosave' %> Male
+        <% end %>
+        <%= f.label :gender, :class => 'radio inline' do %>
+            <%= f.radio_button :gender, 'female', :class => 'autosave' %> Female
+        <% end %>
+    </div>
+</div>
+
+<div class="control-group">
+    <%= f.label :bio, "User Bio", :class => "big" %>
+    <div class="push">
+        <span id="bio_count"><%= 500 - (@user.bio.blank? ? 0 : @user.bio.length) %></span><br>
+        <%= f.text_area :bio, :class => 'autosave' %>
+    </div>
+</div>
+
+<div class="control-group">
+    <%= f.label :email, "Contact Email", :class => "big" %>
+    <div class="push">
+        <%= f.text_field :email, :class => 'autosave' %>
+    </div>
+</div>
+
+<div class="control-group">
+    <%= f.label :username, "Username", :class => "big" %>
+    <div class="push">
+        <%= f.text_field :username, :class => 'autosave' %>
+    </div>
+</div>
+
+<div class="control-group">
+    <%= f.label :timezone, :class => "big" %>
+    <div class="push">
+		<%= f.collection_select :timezone, ActiveSupport::TimeZone.us_zones, :name, :to_s, {:include_blank => 'Select Timezone'}, { :class => 'autosave' } %>
+    </div>
+</div>
+
+<div class="control-group">
+    <%= f.label :zipcode, :class => "big" %>
+    <div class="push">
+        <%= f.text_field :zipcode, :class => 'autosave' %>
+    </div>
+</div>
+
+<div class="control-group">
+    <%= f.label :birthday, :class => "big" %>
+    <div class="push">
+        <%= f.text_field :birthday, :id => "birthday_datepicker", :class => 'autosave' %>
+
+        <%= f.label :birthday_public, :class => "checkbox switcher inline" do %>
+            <%= f.check_box :birthday_public, :class => 'switch autosave' %> <span class="on">Public</span><span class="off">Private</span>
+        <% end %>
+    </div>
+</div>
+
+<% if @user.role?('guru') %>
+    <%= render 'users/shared/settings/interests', :f => f, :title => 'Specialties' %>
+<% end %>

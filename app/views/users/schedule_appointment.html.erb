@@ -1,0 +1,153 @@
+<h2>Schedule a Wurqout with <%= @guru.member_name.blank? ? @guru.username : @guru.member_name %></h2>
+<input type="hidden" id="user_tz_offset" value="<%= DateTime.now.in_time_zone(current_user.timezone).strftime('%z') %>"/>
+
+<%= form_for @wurqout_session, :html => {:class => 'form-session'} do |f| %>
+
+    <%= f.hidden_field 'guru_id', {:value => @guru.id, :id => "user_id"}  %>
+    <%= f.hidden_field 'wurqer_id', {:value => current_user.id, :id => "wurqer_id"} %>
+    
+    <% params[:errors].each do |error| %>
+        <p><%= error %></p>
+    <% end if params[:errors] %>
+    
+    <div class="row">
+        <div id="sched_session_left">
+            <div class="control-group">
+                <%= label_tag 'model_session_type', 'Session Type', :class => 'big' %>
+                <div class="push">
+                    <%= f.select 'session_type', options_for_select(@guru.user_interests.collect(&:interest), (params[:modelwurqout_session] ? params[:wurqout_session][:session_type] : '')) %>
+                </div>
+            </div>
+            <% if @guru.wurqout_preference_beginner or @guru.wurqout_preference_intermediate or @guru.wurqout_preference_advanced or @guru.wurqout_preference_hardcore %>
+            <div class="control-group">
+                <%= label_tag nil, 'Wurqout Activity Level', :class => 'big' %>
+                <div class="well push">
+                    <ul class="split split4 unstyled centered">
+                        <li>
+                            <%= f.radio_button 'wurqout_level', "beginner", :class => "activity_level", :disabled => !@guru.wurqout_preference_beginner, :checked => (params[:wurqout_session] and params[:wurqout_session][:wurqout_level] == 'beginner') %>
+                            <%= label_tag 'wurqout_session_wurqout_level_beginner', 'Beginner' %>
+                        </li>
+                        <li>
+                            <%= f.radio_button 'wurqout_level', "intermediate", :class => "activity_level", :disabled => !@guru.wurqout_preference_intermediate, :checked => (params[:wurqout_session] and params[:wurqout_session][:wurqout_level] == 'intermediate') %>
+                            <%= label_tag 'wurqout_session_wurqout_level_intermediate', 'Intermediate' %>
+                        </li>
+                        <li>
+                            <%= f.radio_button 'wurqout_level', "advanced", :class => "activity_level", :disabled => !@guru.wurqout_preference_advanced, :checked => (params[:wurqout_session] and params[:wurqout_session][:wurqout_level] == 'advanced') %>
+                            <%= label_tag 'wurqout_session_wurqout_level_advanced', 'Advanced' %>
+                        </li>
+                        <li>
+                            <%= f.radio_button 'wurqout_level', "hardcore", :class => "activity_level", :disabled => !@guru.wurqout_preference_hardcore, :checked => (params[:wurqout_session] and params[:wurqout_session][:wurqout_level] == 'hardcore') %>
+                            <%= label_tag 'wurqout_session_wurqout_level_hardcore', 'Hardcore' %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <% end %>
+            <div class="control-group">
+                <%= label_tag nil, 'Wurqout Duration', :class => 'big' %>
+                <div class="well push">
+                    <ul class="split split3 unstyled centered">
+                        <li>
+                            <input type="radio" name="duration" id="duration_tier1" class="duration" data-cost="<%= @guru.guru_pricing_tier1 %>" value="15"<%= ' disabled' if !@guru.guru_pricing_tier1_enabled %><%= ' checked' unless params[:duration] and params[:duration] != '15'%>/>
+                            <%= label_tag 'duration_tier1', '15 min' %>
+                        </li>
+                        <li>
+                            <input type="radio" name="duration" id="duration_tier2" class="duration" data-cost="<%= @guru.guru_pricing_tier2 %>" value="30"<%= ' disabled' if !@guru.guru_pricing_tier2_enabled %><%= ' checked' if params[:duration] == '30'%>/>
+                            <%= label_tag 'duration_tier2', '30 min' %>
+                        </li>
+                        <li>
+                            <input type="radio" name="duration" id="duration_tier3" class="duration" data-cost="<%= @guru.guru_pricing_tier3 %>" value="60"<%= ' disabled' if !@guru.guru_pricing_tier3_enabled %><%= ' checked' if params[:duration] == '60'%>/>
+                            <%= label_tag 'duration_tier3', '60 min' %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="control-group">
+                <%= label_tag nil, 'Choose Wurqout Date and Time', :class => 'big' %>
+            </div>
+            <div id="wurqout_date" class="control-group">
+                <div class="push">
+                    <span class="input-append">
+                        <input type="text" name="session_date" class="session_date"/><span class="add-on"><i class="icon-calendar"></i></span>
+                    </span>
+                    <select name="session_time" class="session_time" disabled></select>
+                    <%= f.hidden_field 'start_date', :id => 'session_start'%>
+                    <%= f.hidden_field 'end_date', :id => 'session_end'%>
+                </div>
+            </div>
+        </div>
+        <div id="sched_session_right">
+            <input type="hidden" id="calendar_year" value="<%= DateTime.now.in_time_zone(current_user.timezone).year %>"/>
+            <input type="hidden" id="calendar_month" value="<%= DateTime.now.in_time_zone(current_user.timezone).month %>"/>
+            <div class="calendar-default push">
+                <div class="header-title"><%= (@guru.member_name.blank? ? @guru.username : @guru.member_name).possessive %> Availability</div>
+                <div class="month-nav">
+                    <button id="prev_month" class="arrow hide"></button>
+                    <div class="title">
+                        <span id="month_name"><%= Date::MONTHNAMES[DateTime.now.in_time_zone(current_user.timezone).month]%></span> <span id="year"><%= DateTime.now.in_time_zone(current_user.timezone).year.to_s %></span>
+                    </div>
+                    <button id="next_month" class="arrow<%= ' hide' if (DateTime.now.in_time_zone(current_user.timezone) + 2.weeks).month == DateTime.now.in_time_zone(current_user.timezone).month %>"></button>
+                </div>
+                <div class="cal-cont">
+                    <table id="guru_calendar" class="table table-calendar">
+                        <thead>
+                            <tr>
+                                <th>SUN</th>
+                                <th>MON</th>
+                                <th>TUE</th>
+                                <th>WED</th>
+                                <th>THU</th>
+                                <th>FRI</th>
+                                <th>SAT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <ul class="legend">
+                        <li><i class="icon14-sun"></i> AM Available Hours</li>
+                        <li><i class="icon14-moon"></i> PM Available Hours</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr/>
+    
+    <div class="control-group">
+        <%= label_tag nil, 'Review your Wurqout Details', :class => 'big' %>
+        <div id="wurqout_details" class="push hide">
+            <div class="info pull-left">
+                <p><strong>Time:</strong><span id="duration_details"></span> minute session</p>
+                <p><strong>Scheduled with:</strong><%= @guru.member_name.present? ? @guru.member_name : @guru.username %></p>
+                <p><strong>Starting at:</strong><span id="start_details"></span></p>
+            </div>
+            <div class="cost pull-left">
+                <h4>Session Price: $<span id="cost_details"></span></h4>
+            </div>
+        </p>
+    </div>
+    
+    <div class="control-group">
+        <%= label_tag 'model_notes', 'Notes for Guru <small>let your guru know if there is any special circumstances they should be aware of.</small>'.html_safe, :class => 'big' %>
+        <div class="push">
+            <%= f.text_area 'notes', :class => 'notes input-xxlarge', :rows => 4 %>
+        </div>
+    </div>
+    <div class="centered">
+        <button class="btn btn-large" id="submit_wurqout_request">Submit request for wurqout and continue to checkout &raquo;</button>
+    </div>
+<% end %>
+
+<% content_for :head_js do %>
+    <script type="text/javascript">
+        $(function(){
+            getGuruAvailability();
+            if( $('.activity_level').length > 0 && $('.activity_level:checked').length == 0 ){
+                $('.activity_level').not(':disabled')[0].checked = true;
+            }
+        });
+    </script>
+<% end %>

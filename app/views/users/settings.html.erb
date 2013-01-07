@@ -1,0 +1,49 @@
+<%= render 'users/shared/user_sidebar' %>
+
+
+<% if @fb_connect_error%>
+	<%= content_tag :p, "Facebook Connect - you can only connect one account at a time.", :class => "alert alert-error flash_fb" %>
+<% end %>
+
+<%= form_for @user, :remote => true, :format => :json, :html => { :class => 'form-settings' } do |f| %>
+    <% flash.each do |name, msg| %>
+        <%= content_tag :p, msg, :class => "alert alert-error flash_#{name}" if msg.length > 0 %>
+    <% end %>
+    <div id="form_notification"><div class="container"></div></div>
+    <div id="profile_accordion">
+        
+        <h3>Profile Details</h3>
+        <div>
+            <%= render 'users/shared/settings/profile_details', :f => f %>
+        </div>
+
+        <h3>Wurqout Preferences</h3>
+        <div>
+            <%= render 'users/shared/settings/wurqout_preferences', :f => f %>
+        </div>
+    
+        <h3>Vital Information</h3>
+        <div>
+            <%= render 'users/shared/settings/vital_information', :f => f %>
+        </div>
+    
+        <h3>Account Settings</h3>
+        <div>
+            <%= render 'users/shared/settings/account_settings', :f => f %>
+        </div>
+        <% if @user.role?('guru') %>
+            <h3<%= raw ' data-loadme="true"' if params[:page] || params[:sort] %>>Testimonials and Promotion</h3>
+            <div>
+                <%= render 'users/shared/settings/testimonials', :f => f %>
+            </div>
+
+            <h3<%= raw ' data-loadme="true"' if params[:billing] %>>Payments and Billing Info</h3>
+            <div>
+               <%= render 'users/shared/settings/billing_payments', :f => f %>
+            </div>
+        <% end %>
+    </div>
+
+    <%= load_interests(f, :user_interests) %>
+
+<% end %>

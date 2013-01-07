@@ -1,0 +1,11 @@
+<%= render 'user_mailer/shared/email_top' %>
+
+    <h1 style="color: #78BE3F;display: block;font-family: Arial;font-size: 30px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 20px;margin-left: 0;text-align: left">
+        Welcome <%= @resource.email %>!
+    </h1>
+
+    <p>You can confirm your account email through the link below:</p>
+
+    <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+
+<%= render 'user_mailer/shared/email_bottom' %>

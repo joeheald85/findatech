@@ -1,0 +1,41 @@
+<% content_for :page_head do %>
+    <h1>Sign In</h1>
+<% end %>
+
+<div class="row sessions">
+    <div class="sessions-right">
+        <div class="inner">
+            <h2>Sign in with email</h2>
+            <%= form_for @user, :url => session_path(resource_name), :validate => true do |f| %>
+                <% flash.each do |name, msg| %>
+                    <%= content_tag :p, msg, :class => "alert alert-error flash_#{name}" if msg.length > 0 %>
+                <% end %>
+                
+                <%= f.label :email %>
+                <%= f.email_field :email, :validate => {:uniqueness => false} %>
+
+                <%= f.label :password %>
+                <%= f.password_field :password, :validate => {:presence => true, :confirmation => false} %>
+
+                <% if devise_mapping.rememberable? -%>
+                    <div class="checkbox"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+                <% end -%>
+
+                <div class="submit">
+                    <%= f.submit "Sign in", :class => "btn btn-xl btn-submit" %>
+                </div>
+            <% end %>
+
+            <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+                <p>
+                    <%= link_to "Forgot your password?", new_password_path(resource_name), :class => "forgot-pw-link" %>
+                </p>
+            <% end -%>
+        </div>
+    </div>
+    <div class="sessions-full">
+        <p class="register-msg">
+            Don’t have an account yet? <%= link_to 'Register today', new_user_registration_path %>
+        </p>
+    </div>
+</div>

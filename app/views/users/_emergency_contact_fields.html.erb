@@ -1,0 +1,28 @@
+
+<% id = f.object.id.nil? ? 'replace_id' : f.object.id %>
+	
+<div class="fields well">
+    <ul class="split split2 unstyled control-group">
+        <li>
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, 'data-id' => id, :class => 'autosave' %>
+        </li>
+        <li>
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, 'data-id' => id,  :class => 'autosave' %>  
+        </li>
+    </ul>
+    <ul class="split split2 unstyled">
+        <li>
+            <%= f.label :relationship, 'Relationship to you' %>
+            <%= f.text_field :relationship, 'data-id' => id,  :class => 'autosave'  %>
+        </li>
+        <li>
+            <%= f.label :phone_number, 'Phone Number' %>
+            <%= f.text_field :phone_number, 'data-id' => id,  :class => 'autosave' %>
+        </li>
+    </ul>  
+    <%= link_to_remove_emergency_contact '<i class="icon-remove"></i>'.html_safe, f, :class => 'btn btn-mini remove' %>
+</div>
+
+

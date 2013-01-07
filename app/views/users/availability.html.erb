@@ -1,0 +1,29 @@
+<div class="calendar-default">
+    <div class="wc-top-header header-title">Your Availability</div>
+    <div id="calendar"></div>
+    
+    <input type="hidden" id="user_tz_offset" value="<%= DateTime.now.in_time_zone(current_user.timezone).strftime('%z') %>"/>
+    <div id="event_edit_container">
+        <div class="arrow"></div>
+        <div class="wc-dialog-title"></div>
+        <form class="form-calendar-modal">
+            <input type="hidden" />
+            <p class="centered"><small>Date: <span class="date_holder"></span></small></p>
+            <ul class="split2 unstyled">
+                <li>
+                    <label for="start">Start Time</label>
+                    <select name="start"><option value="">Select Start Time</option></select>
+                </li>
+                <li>
+                    <label for="end">End Time</label>
+                    <select name="end"><option value="">Select End Time</option></select>
+                </li>
+            </ul>
+            <div class="control-group">
+                <label class="checkbox inline" for="recurring">
+                    <input type="checkbox" name="recurring" id="recurring" value="true"> Repeat every week
+                </label>
+            </div>
+        </form>
+    </div>
+</div>

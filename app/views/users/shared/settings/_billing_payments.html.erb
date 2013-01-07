@@ -1,0 +1,118 @@
+<div class="control-group spaced">
+    <%= label_tag 'Your Billing Information', nil, :class => "big" %>
+    <br>
+    <div class="control-group push">
+	    <%= f.label :paypal_email, "Paypal Email Address" %>
+	    <%= f.text_field :paypal_email, :class => 'autosave' %>
+	</div>
+</div>
+
+<div class="control-group spaced">
+    <%= label_tag 'Your Current Statement', nil, :class => "big" %>
+    <div class="control-group">
+		<table class="table table-billing">
+			<thead>
+				<tr>
+					<th colspan="2">Person</th>
+					<th>Session</th>
+					<th>Fee</th>
+					<th>Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% total = 0 %>
+				<% @user.guru_wurqout_sessions.select{|w| w.status == 'completed' and !w.payment.dispersed and !w.payment.refunded }.each do |w| %>
+					<tr>
+						<td class="avatar"><%= image_tag w.wurqer.profile_picture.url(:tiny) %></td>
+						<td><%= w.wurqer.member_name.present? ? w.wurqer.member_name : w.wurqer.username %></td>
+						<td><%= ((w.end_date - w.start_date)/60).to_i.to_s+'min: '+number_to_currency(w.cost) %></td>
+						<td>(<%= number_to_currency((w.cost.to_f/10)) %>)</td>
+						<td><%= number_to_currency(w.cost - (w.cost.to_f/10)) %></td>
+					</tr>
+					<% total += (w.cost - (w.cost.to_f/10)) %>
+				<% end %>
+			</tbody>
+			<tfoot>
+				<tr>
+					<% if total == 0 %>
+						<td></td>
+						<td colspan="3"><i>no unpaid wurqout sessions</i></td>
+						<td></td>
+					<% else %>
+						<td colspan="3"></td>
+						<td colspan="3">Total as of <%= DateTime.now.in_time_zone(@user.timezone || 'UTC').strftime('%D') %>: <strong><%= number_to_currency(total) %></strong></td>
+					<% end %>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+
+<div class="control-group spaced">
+    <%= label_tag 'Your Past and Pending Payments', nil, :class => "big" %>
+    <div class="control-group">
+		<table class="table table-billing">
+			<thead>
+				<tr>
+					<th>Payment Date</th>
+					<th>Status</th>
+					<th>Total</th>
+					<th>View</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @user.guru_payments.order('created_at desc').each_with_index do |p, index| %>
+					<tr class="<%= 'hidden_row' if index > 5 %>">
+						<td><%= p.created_at.in_time_zone(@user.timezone).strftime('%D') %></td>
+						<td>COMPLETE</td>
+						<td><%= number_to_currency(p.amount) %></td>
+						<td><%= link_to 'View', '', :class => 'btn guru_payment', :'data-payment' => p.id %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% if @user.guru_payments.size > 6 %><p class="pull-right"><a href="" id="more_payments">load more</a></p><% end %>
+	</div>
+</div>
+
+<% @user.guru_payments.each do |p| %>
+	<div id="payment_modal_<%= p.id %>" class="modal hide fade">
+		<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	        <h3>Statement for <%= p.created_at.in_time_zone(@user.timezone).strftime('%D') %></h3>
+	    </div>
+	    <div class="modal-body">
+	        <div class="section overview">
+	            <p>Date: <%= p.created_at.in_time_zone(@user.timezone).strftime('%D') %> | Status: COMPLETE</p>
+	        </div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>Person</td>
+						<td>Session</td>
+						<td>Fee</td>
+						<td>Total</td>
+					</tr>
+				</thead>
+				<tbody>
+					<% total = 0 %>
+					<% p.payments.each do |p| %>
+						<tr>
+							<td><%= image_tag p.wurqout_session.wurqer.profile_picture.url(:tiny) %><%= p.wurqout_session.wurqer.member_name.present? ? p.wurqout_session.wurqer.member_name : p.wurqout_session.wurqer.username %></td>
+							<td><%= ((p.wurqout_session.end_date - p.wurqout_session.start_date)/60).to_i.to_s+'min: '+number_to_currency(p.amount) %></td>
+							<td>(<%= number_to_currency((p.amount.to_f/10)) %>)</td>
+							<td><%= number_to_currency(p.amount - (p.amount.to_f/10)) %></td>
+						</tr>
+						<% total += (p.amount - (p.amount.to_f/10)) %>
+					<% end %>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2"></td>
+						<td colspan="2">Total: <%= number_to_currency(total) %></td>
+					</tr>
+				</tfoot>
+			</table>
+	    </div>
+	</div>
+<% end %>

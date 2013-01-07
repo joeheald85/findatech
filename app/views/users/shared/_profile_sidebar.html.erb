@@ -1,0 +1,58 @@
+<% content_for :right_sidebar do %>
+    <div class="widget spaced centered">
+        <% if user_signed_in? %>
+            <% if @user.id.to_i != current_user.id %>
+                <% if @user.role?('guru') %>
+                    <%= link_to 'Schedule a Wurqout', user_schedule_wurqout_path(@user), :class => 'btn btn-blue schedule' %>
+                <% elsif @user.role?('wurqer') and @user.allow_contact %>
+                    <%= link_to 'Request a Wurqout', new_cowurq_session_path(:user_id => @user.id), :class => 'btn btn-green schedule' %>
+                <% end %>
+            <% end %>
+            
+            <% if current_user.friends.include?(@user) and @user.friends.include?(current_user) %>
+                <%= link_to 'Send Message', new_message_path(:to_user => @user.id), :class => 'btn btn-blue' %>
+            <% end %>
+        <% else %>
+            <% if @user.role?('guru') %>
+                <%= link_to 'Schedule a Wurqout', new_user_registration_path, :class => 'btn btn-blue schedule' %>
+            <% elsif @user.role?('wurqer') and @user.allow_contact %>
+                <%= link_to 'Request a Wurqout', new_user_registration_path, :class => 'btn btn-green schedule' %>
+            <% end %>
+        <% end %>
+    </div>
+    <div class="widget">
+        <div class="widget-profile-photo">
+            <%= image_tag @user.profile_picture.url(:large) %>
+        </div>
+    </div>
+    <% if @user.role?('guru') %>
+        <%= render 'users/shared/widgets/rates', :user => @user %>
+        <% title = "Guru’s" %>
+    <% else %>
+        <% title = "Wurqer’s" %>
+    <% end %>
+    <div class="widget-title"><h3 class="green">Awards</h3></div>
+    <div class="widget widget-awards">
+        <%= render 'users/shared/widgets/awards' %>
+    </div>
+    <% if user_signed_in? and @user.id.to_i == current_user.id %>
+        <% title = "My" %>
+    <% end %>
+    <div class="widget-title"><h3 class="green"><%= title %> Netwurq</h3></div>
+    <div class="widget widget-netwurq">
+        <%= render 'users/shared/widgets/netwurq', :user => @user %>
+        <% if user_signed_in? %>
+            <% if @user.id.to_i != current_user.id %>
+                <% if current_user.networks.find_by_friend_id(@user.id).nil? %>
+                    <%= link_to '<b>+</b>Add to your netwurq'.html_safe, user_add_network_path(@user), :class => 'btn btn-add btn-block' %>
+                <% else %>
+                    <%= link_to '<b>&minus;</b>Remove from Netwurq'.html_safe, user_delete_network_path(@user), :class => 'btn btn-add btn-block' %>
+                <% end %>
+            <% end %>
+        <% else %>
+            <%= link_to '<b>+</b>Add to your netwurq'.html_safe, new_user_registration_path, :class => 'btn btn-add btn-block' %>
+        <% end %>
+        
+    </div>
+
+<% end %>

@@ -1,0 +1,16 @@
+<% if user.guru_pricing_tier1_enabled or user.guru_pricing_tier2_enabled or user.guru_pricing_tier3_enabled %>
+    <div class="widget spaced">
+        <dl class="widget-rates centered">
+            <dt>Rates</dt>
+            <% if user.guru_pricing_tier1_enabled %>
+                <dd>15 min: <%= number_to_currency(user.guru_pricing_tier1, :precision => 0) %></dd>
+            <% end %>
+            <% if user.guru_pricing_tier2_enabled %>
+                <dd>30 min: <%= number_to_currency(user.guru_pricing_tier2, :precision => 0) %></dd>
+            <% end %>
+            <% if user.guru_pricing_tier3_enabled %>
+                <dd>60 min: <%= number_to_currency(user.guru_pricing_tier3, :precision => 0) %></dd>
+            <% end %>
+        </dl>
+    </div>
+<% end %>

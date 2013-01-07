@@ -1,0 +1,7 @@
+<% theuser = (@user || current_user) %>
+<div class="shelf">
+    <% user_badges(theuser).first(6).each do |award| %>
+        <div class="award <%= award[:type] %> small level-<%= award[:level].to_s %> sublevel-<%= award[:level] < theuser.user_level ? 5 : theuser.user_sublevel %>" rel="tooltip" title="Level <%= award[:level].to_s %> <%= award[:label] %>"></div>
+    <% end %>
+</div>
+<%= link_to 'View all awards &raquo;'.html_safe, user_awards_path(theuser), :class => 'blue' %>

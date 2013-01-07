@@ -1,0 +1,146 @@
+<%= render 'users/shared/user_sidebar' %>
+
+<input type="hidden" id="user_id" value="<%= current_user.id %>"/>
+
+<div id="schedule_right">
+    <input type="hidden" id="calendar_year" value="<%= DateTime.now.in_time_zone(current_user.timezone).year %>"/>
+    <input type="hidden" id="calendar_month" value="<%= DateTime.now.in_time_zone(current_user.timezone).month %>"/>
+    <div class="calendar-default push">
+        <div class="header-title">My Schedule</div>
+        <div class="month-nav">
+            <button id="prev_month_schedule" class="arrow"></button>
+            <div class="title">
+                <span id="month_name"><%= Date::MONTHNAMES[DateTime.now.in_time_zone(current_user.timezone).month]%></span> <span id="year"><%= DateTime.now.in_time_zone(current_user.timezone).year.to_s %></span>
+            </div>
+            <button id="next_month_schedule" class="arrow"></button>
+        </div>
+        <div class="cal-cont">
+            <table id="my_schedule_calendar" class="table table-calendar">
+                <thead>
+                    <tr>
+                        <th>SUN</th>
+                        <th>MON</th>
+                        <th>TUE</th>
+                        <th>WED</th>
+                        <th>THU</th>
+                        <th>FRI</th>
+                        <th>SAT</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <ul class="legend">
+                <li><i class="icon14-dot-bl"></i> Scheduled wurqout with guru</li>
+                <li><i class="icon14-dot-gr"></i> Scheduled wurqout with friend</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<%= link_to 'Sync to Google Calendar', '', :class => 'sync_gcal btn btn-green pull-right' if current_user.gmail_email.present? and current_user.gmail_calendar_name.present? %>
+<div id="planner-history" class="push">
+    <% if @upcoming_sessions.size > 0 %>
+    	<h3>Upcoming</h3>
+    	<ul class="unstyled">
+    	<% @upcoming_sessions.sort{|a, b| b <=> a}.each_with_index do |ws, index| %>
+    		<li class="session_row<%= ' hidden_row hide' if index > 4 %>" data-id="<%=ws.id%>" data-type="<%= ws.attributes['guru_id'].nil? ? 'cowurq' : 'guru' %>">
+    			<% other_person = (ws.attributes['guru_id'].nil? ? (current_user == ws.user ? ws.cowurqer : ws.user) : (current_user == ws.guru ? ws.wurqer : ws.guru)) %>
+    			<p class="date"><%= ws.start_date.in_time_zone(current_user.timezone).strftime('%D') %></p>
+    			<div>
+    			    <div class="pull-right hide actions">
+    				    <%= link_to 'Send Message', '#', :class => 'add_session_note btn' %>
+    				    <%= link_to 'Cancel Session', (ws.attributes['guru_id'].nil? ? cowurq_session_cancel_session_path(ws) : wurqout_session_cancel_session_path(ws)), :class => 'btn', :confirm => 'Are you sure you want to cancel this session?' %>
+    				</div>
+    				<%= image_tag other_person.profile_picture.url(:tiny) %> <%= ws.start_date.in_time_zone(current_user.timezone).strftime('%l:%M%p') %> - <%= ws.session_type.blank? ? 'Wurqout' : ws.session_type %> with 
+    				<%= link_to (other_person.member_name.blank? ? other_person.username : other_person.member_name), user_profile_path(other_person) %>
+    			</div>
+    		</li>
+    	<% end %>
+    	</ul>
+    	<% if @upcoming_sessions.size > 5 %>
+    		<p class="centered"><%= link_to 'Load more upcoming', "", :id => 'load_more_upcoming', :class => 'btn' %></p>
+    	<% end %>	
+    <% end %>
+
+    <% if @ws_history.size > 0 %>
+    	<h3>Wurqout History</h3>
+    	<ul class="unstyled">
+    	<% @ws_history.each do |ws| %>
+    		<li class="session_row" data-id="<%=ws.id%>" data-type="guru">
+    			<% other_person = (current_user == ws.guru ? ws.wurqer : ws.guru) %>
+    			<p class="date"><%= ws.start_date.in_time_zone(current_user.timezone).strftime('%D') %></p>
+    			<div>
+    			    <div class="pull-right hide actions">
+    				    <%= link_to 'Send Message', '#', :class => 'add_session_note btn' %>
+    				    <%= link_to 'View Notes', wurqout_session_path(ws), :class => 'btn' %>
+    				</div>
+    				<%= image_tag other_person.profile_picture.url(:tiny) %> <%= ws.start_date.in_time_zone(current_user.timezone).strftime('%l:%M%p') %> - <%= ws.session_type.blank? ? 'Wurqout' : ws.session_type %> with 
+    				<%= link_to (other_person.member_name.blank? ? other_person.username : other_person.member_name), user_profile_path(other_person) %>
+    			</div>
+    		</li>
+    	<% end %>
+        </ul>
+    	<%= will_paginate @ws_history, :param_name => 'guru_sessions', :renderer => BootstrapPagination::Rails %>
+    <% end %>
+
+    <% if @cs_history.size > 0 %>
+    	<h3>Co-Wurqout History</h3>
+    	<ul class="unstyled">
+    	<% @cs_history.each do |ws| %>
+    		<li class="session_row" data-id="<%=ws.id%>" data-type="cowurq">
+    			<% other_person = (current_user == ws.user ? ws.cowurqer : ws.user) %>
+    			<p class="date"><%= ws.start_date.in_time_zone(current_user.timezone).strftime('%D') %></p>
+    			<div>
+    			    <div class="pull-right hide actions">
+    				    <%= link_to 'Send Message', '#', :class => 'add_session_note btn' %>
+    				    <%= link_to 'View Notes', cowurq_session_path(ws), :class => 'btn' %>
+    				</div>
+    				<%= image_tag other_person.profile_picture.url(:tiny) %> <%= ws.start_date.in_time_zone(current_user.timezone).strftime('%l:%M%p') %> - <%= ws.session_type.blank? ? 'Wurqout' : ws.session_type %> with 
+    				<%= link_to (other_person.member_name.blank? ? other_person.username : other_person.member_name), user_profile_path(other_person) %>
+    			</div>
+    		</li>
+    	<% end %>
+        </ul>
+    	<%= will_paginate @cs_history, :param_name => 'cowurq_sessions', :renderer => BootstrapPagination::Rails %>
+    <% end %>
+</div>
+
+<div id="day_modals">
+	
+</div>
+
+<div id="add_session_notes_modal" class="modal hide fade" data-id="" data-type="">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Send Message</h3>
+    </div>
+    <div class="modal-body">
+        <textarea id="session_note_body"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-success" id="my_schedule_submit_note">Submit Message</button>
+    </div>
+</div>
+
+<div id="sync_modal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Sync To Google Calendar</h3>
+    </div>
+    <div class="modal-body">
+		<p>Google Email Address: <%= current_user.gmail_email %></p>
+        Google Password: <input type="password" id="gcal_pw">
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-success" id="submit_gcal_sync">Sync Calendar</button>
+    </div>
+</div>
+
+<script>
+	$(function(){
+		getMySchedule();
+	});
+</script

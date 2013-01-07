@@ -1,0 +1,94 @@
+<% content_for :page_head do %>
+    <h1>Sign Up</h1>
+<% end %>
+
+<div class="row sessions">
+    <div class="sessions-right">
+        <div class="inner">
+            <h2>Sign up with email</h2>
+            <%= form_for @user, :validate => true do |f| %>
+                <% flash.each do |name, msg| %>
+                    <%= content_tag :p, msg, :class => "alert alert-error flash_#{name}" if msg.length > 0 %>
+                <% end %>
+
+                <p><%= f.label :email %><br>
+                <%= f.email_field :email, :validate => true %></p>
+
+                <p><%= f.label :full_name %><br>
+                <%= f.text_field :full_name %></p>
+
+                <p><%= f.label :username %><br>
+                <%= f.text_field :username, :validate => true %></p>
+
+                <p><%= f.label :password %><br>
+                <%= f.password_field :password, :validate => true %></p>
+
+                <p><%= f.label :password_confirmation %><br>
+                <%= f.password_field :password_confirmation, :validate => true %></p>
+
+                <p><%= f.label :city %><br>
+                <%= f.text_field :city %></p>
+
+                <p><%= f.label :state %><br>
+                <%= f.text_field :state %></p>
+
+                <p><%= f.label :zip %><br>
+                <%= f.text_field :zip %></p>
+                
+                <p><%= f.label :timezone %><br>
+                <%= collection_select 'user', 'timezone', ActiveSupport::TimeZone.us_zones, :name, :to_s %></p>
+                
+                <p><%= label_tag :role_tech, 'Technician?' %>
+                <input type="checkbox" id="role_tech" name="role[tech]" value="1"></p>
+                
+                <div id="tech_fields">
+                  <p><%= f.label :rate, "Hourly Rate $" %>
+                  <%= f.text_field :rate %></p>
+                  
+                  <p><%= f.label :distance, "Preferred Distance to Travel" %>
+                  <%= f.select :distance, options_for_select([['Miles', 0], ['10', 10], ['20', 20], ['30', 30], ['50', 50], ['100', 100]]) %> Miles</p>
+                </div>
+
+                <div class="submit">
+                    <%= f.submit "Sign up", :class => "btn btn-xl btn-submit" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="sessions-full">
+        <p class="register-msg">
+            Already have an account? <%= link_to 'Sign in.', new_user_session_path %>
+        </p>
+    </div>
+</div>
+<script>
+	$(function(){
+		$('#tech_fields').hide();
+		$('#role_tech').click(function(){
+			if($(this).is(':checked')){
+				$('#tech_fields').show();
+			}else{
+				$('#tech_fields').hide();
+			}
+		});
+		
+		var date = new Date();
+		var date_string = date.toString();
+		
+		if( date_string.indexOf('IST') > -1 ){
+			$('#user_timezone').val('Indiana (East)');
+		}else if( date_string.indexOf('EST') > -1 || date_string.indexOf('EDT') > -1 ){
+			$('#user_timezone').val('Eastern Time (US & Canada)');
+		}else if( date_string.indexOf('CST') > -1 || date_string.indexOf('CDT') > -1 ){
+			$('#user_timezone').val('Central Time (US & Canada)');
+		}else if( date_string.indexOf('MST') > -1 || date_string.indexOf('MDT') > -1 ){
+			$('#user_timezone').val('Mountain Time (US & Canada)');
+		}else if( date_string.indexOf('PST') > -1 || date_string.indexOf('PDT') > -1 ){
+			$('#user_timezone').val('Pacific Time (US & Canada)');
+		}else if( date_string.indexOf('AKST') > -1 || date_string.indexOf('AKDT') > -1 ){
+			$('#user_timezone').val('Alaska');
+		}else if( date_string.indexOf('HAST') > -1 || date_string.indexOf('HADT') > -1 ){
+			$('#user_timezone').val('Hawaii');
+		}
+	});
+</script>

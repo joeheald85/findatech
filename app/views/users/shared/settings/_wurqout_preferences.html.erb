@@ -1,0 +1,159 @@
+<div class="control-group spaced">
+    <%= label_tag 'What time do you prefer to work out?', nil, :class => "big" %>
+    <div class="push">
+        <%= f.label :wurqout_preference_morning, :class => "checkbox inline" do %>
+            <%= f.check_box :wurqout_preference_morning, :class => 'autosave' %> Morning
+        <% end %>
+        <%= f.label :wurqout_preference_afternoon, :class => "checkbox inline" do %>
+            <%= f.check_box :wurqout_preference_afternoon, :class => 'autosave' %> Afternoon
+        <% end %>
+        <%= f.label :wurqout_preference_evening, :class => "checkbox inline" do %>
+            <%= f.check_box :wurqout_preference_evening, :class => 'autosave' %> Evening
+        <% end %>
+    </div>
+</div>
+
+<div class="control-group spaced">
+    <%= label_tag 'What is your preferred activity level?', nil, :class => "big" %>
+    <div class="push">
+        <%= f.label :wurqout_preference_beginner, :class => "checkbox inline" do %>
+            <%= f.check_box :wurqout_preference_beginner, :class => 'autosave' %> Beginner
+        <% end %>
+        <%= f.label :wurqout_preference_intermediate, :class => "checkbox inline" do %>
+            <%= f.check_box :wurqout_preference_intermediate, :class => 'autosave' %> Intermediate
+        <% end %>
+        <%= f.label :wurqout_preference_advanced, :class => "checkbox inline" do %>
+            <%= f.check_box :wurqout_preference_advanced, :class => 'autosave' %> Advanced
+        <% end %>
+        <%= f.label :wurqout_preference_hardcore, :class => "checkbox inline" do %>
+            <%= f.check_box :wurqout_preference_hardcore, :class => 'autosave' %> Hardcore
+        <% end %>
+    </div>
+</div>
+
+<% if @user.role?('wurqer') %>
+    <%= render 'users/shared/settings/interests', :f => f, :title => 'Interests' %>
+<% end %>
+
+<% if @user.role?('wurqer') %>
+    <div class="control-group spaced">
+        <%= label_tag 'Training goals (select all that apply)', nil, :class => "big" %>
+        <div class="push">
+            <ul class="split split3 unstyled">
+                <li>
+                    <%= f.label :goal_lose_weight, :class => "checkbox" do %>
+                        <%= f.check_box :goal_lose_weight, :class => 'autosave' %> Lose weight
+                    <% end %>
+
+                    <%= f.label :goal_eat_right, :class => "checkbox" do %>
+                        <%= f.check_box :goal_eat_right, :class => 'autosave' %> Eat right
+                    <% end %>
+
+                    <%= f.label :goal_wurqout_more, :class => "checkbox" do %>
+                        <%= f.check_box :goal_wurqout_more, :class => 'autosave' %> Wurqout more
+                    <% end %>
+
+                    <%= f.label :goal_tone, :class => "checkbox" do %> 
+                        <%= f.check_box :goal_tone, :class => 'autosave' %> Tone
+                    <% end %>
+
+                    <%= f.label :goal_get_stronger, :class => "checkbox" do %>
+                        <%= f.check_box :goal_get_stronger, :class => 'autosave' %> Get stronger
+                    <% end %>
+                </li>
+                <li>
+                    <%= f.label :goal_increase_flexibility, :class => "checkbox" do %>
+                        <%= f.check_box :goal_increase_flexibility, :class => 'autosave' %> Increase Flexibility
+                    <% end %>
+
+                    <%= f.label :goal_increase_engery, :class => "checkbox" do %>
+                        <%= f.check_box :goal_increase_engery, :class => 'autosave' %> Increase energy
+                    <% end %>
+
+                    <%= f.label :goal_reduce_stress, :class => "checkbox" do %>
+                        <%= f.check_box :goal_reduce_stress, :class => 'autosave' %> Reduce stress
+                    <% end %>
+
+                    <%= f.label :goal_increase_endurance, :class => "checkbox" do %>
+                        <%= f.check_box :goal_increase_endurance, :class => 'autosave' %> Increase endurance
+                    <% end %>
+
+                    <%= f.label :goal_learn_how_to_excercise, :class => "checkbox" do %>
+                        <%= f.check_box :goal_learn_how_to_excercise, :class => 'autosave' %> Learn how to exercise
+                    <% end %>
+                </li>
+                <li>
+                    <%= f.label :goal_look_better_naked, :class => "checkbox" do %>
+                        <%= f.check_box :goal_look_better_naked, :class => 'autosave' %> Look better naked
+                    <% end %>
+
+                    <%= f.label :goal_sports_specific, :class => "checkbox" do %>
+                        <%= f.check_box :goal_sports_specific, :class => 'autosave' %> Sports-specific goals
+                    <% end %>
+                
+                    <%= f.label :goal_feel_better, :class => "checkbox" do %>
+                        <%= f.check_box :goal_feel_better, :class => 'autosave' %> Feel better about myself
+                    <% end %>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="control-group spaced">
+        <%= label_tag nil, 'Are you interested in co-wurqing?', :class => "big" %>
+        <div class="push">
+            <%= f.label :allow_contact, :class => "checkbox inline" do %>
+                <%= f.check_box :allow_contact, :class => 'autosave' %> Yes! Allow others to contact me
+            <% end %>
+        </div>
+    </div>
+<% end %>
+
+<% if @user.role?('guru')%>
+    <div class="control-group spaced">
+        <%= label_tag nil, 'Session Rates', :class => "big" %>
+        <div id="session_rates" class="form-horizontal">
+            <div class="control-group">
+                <%= f.label :guru_pricing_tier1, '15 mins', :class => "control-label" %>
+                <div class="controls">
+                    <span class="input-prepend">
+                        <span class="add-on">$</span><%= f.text_field :guru_pricing_tier1 %>
+                    </span>
+                    <%= f.label :guru_pricing_tier1_enabled, :"data-noblank" => 'true', :class => "checkbox switcher inline" do %>
+                        <%= f.check_box :guru_pricing_tier1_enabled, :class => 'switch autosave' %> <span class="on">Enabled</span><span class="off">Disabled</span>
+                    <% end %>
+                    <div class="error"><i></i><label class="message">can't be blank &amp; enabled</label></div>
+                </div>
+            </div>
+            <div class="control-group">
+                <%= f.label :guru_pricing_tier1, '30 mins', :class => "control-label" %>
+                <div class="controls">
+                    <span class="input-prepend">
+                        <span class="add-on">$</span><%= f.text_field :guru_pricing_tier2 %>
+                    </span>
+                    <%= f.label :guru_pricing_tier2_enabled, :"data-noblank" => 'true', :class => "checkbox switcher inline" do %>
+                        <%= f.check_box :guru_pricing_tier2_enabled, :class => 'switch autosave' %> <span class="on">Enabled</span><span class="off">Disabled</span>
+                    <% end %>
+                    <div class="error"><i></i><label class="message">can't be blank &amp; enabled</label></div>
+                </div>
+            </div> 
+            <div class="control-group">
+                <%= f.label :guru_pricing_tier1, '60 mins', :class => "control-label" %>
+                <div class="controls">
+                    <span class="input-prepend">
+                        <span class="add-on">$</span><%= f.text_field :guru_pricing_tier3 %>
+                    </span>
+                    <%= f.label :guru_pricing_tier3_enabled, :"data-noblank" => 'true', :class => "checkbox switcher inline" do %>
+                        <%= f.check_box :guru_pricing_tier3_enabled, :class => 'switch autosave' %> <span class="on">Enabled</span><span class="off">Disabled</span>
+                    <% end %>
+                    <div class="error"><i></i><label class="message">can't be blank &amp; enabled</label></div>
+                </div>
+            </div>
+       </div>
+   </div>
+
+   <div class="control-group spaced">
+       <%= label_tag nil, 'Set your Availability', :class => "big" %>
+       <p>You can access <%= link_to 'your availability calendar', availability_path %> at any time from the user menu on the top right.</p>
+       <%= link_to '<i class="icon-calendar"></i> Set your availability'.html_safe, availability_path, :class => 'btn btn-text' %>
+   </div>
+<% end %>

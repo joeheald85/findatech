@@ -1,0 +1,58 @@
+<div class="control-group spaced">
+    <%= label_tag "Emails", nil, :class => "big" %>
+    <div class="push">
+        <%= f.label :email_me_website_news, :class => "checkbox" do %> 
+            <%= f.check_box :email_me_website_news, :class => 'autosave' %> Email me with website news
+        <% end %>
+
+        <%= f.label :email_wurqout_request, :class => "checkbox" do %> 
+            <%= f.check_box :email_wurqout_request, :class => 'autosave' %> Email me when I get a wurqout request
+        <% end %>
+
+        <%= f.label :email_request_to_join, :class => "checkbox" do %> 
+            <%= f.check_box :email_request_to_join, :class => 'autosave' %> Email me when someone requests to join my netwurq
+        <% end %>
+
+        <%= f.label :email_cancellation_request_guru, :class => "checkbox" do %>   
+            <%= f.check_box :email_cancellation_request_guru, :class => 'autosave' %> Email me when I get a cancellation or time change from a guru
+        <% end %>
+    </div>
+</div>
+<div class="control-group spaced">
+    <%= label_tag nil, "Connect", :class => "big" %>
+    <div class="push">
+        <% if !current_user.fb_token.nil? %>
+            <%= link_to 'Disconnect Facebook', users_disconnect_facebook_path, :class => "fb-btn" %>
+        <% else %>
+            <%= link_to "Connect with Facebook", users_connect_facebook_path, :class => "fb-popup fb-btn", :"data-width" => 600, :"data-height" => 400 %>
+        <% end %>
+    </div>
+</div>
+<div class="control-group spaced">
+    <%= label_tag nil, "Google Calendar<br><small>Sync wurqouts to google calendar</small>".html_safe, :class => "big" %>
+    <div class="push pad">
+        <%= f.label :gmail_email, "Gmail email address" %> 
+        <%= f.text_field :gmail_email, :class => 'autosave' %>
+
+        <%= f.label :gmail_calendar_name %> 
+        <%= f.text_field :gmail_calendar_name, :class => 'autosave' %>
+    </div>
+</div>
+<div class="control-group spaced">
+    <%= label_tag nil, "Change Password", :class => "big" %>
+    <div class="push pad">
+        <%= f.label :password %> 
+        <%= f.password_field :password, :autocomplete => 'off' %>
+
+        <%= f.label :password_confirmation %> 
+        <%= f.password_field :password_confirmation, :autocomplete => 'off', :class => 'autosave' %>
+    </div>
+</div>
+<div class="control-group spaced">
+    <%= label_tag "Privacy", nil, :class => "big" %>
+    <div class="push">
+        <%= f.label :email_me_website_news, :class => "checkbox" do %> 
+            <%= f.check_box :email_me_website_news, :class => 'autosave' %> Email me with website news
+        <% end %>
+    </div>
+</div>

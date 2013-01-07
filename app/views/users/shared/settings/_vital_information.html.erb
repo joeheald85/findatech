@@ -1,0 +1,92 @@
+<div id="emergency_contacts" class="control-group">
+    <%= label_tag nil, 'Emergency Contact Information', :class => "big" %>
+    <%= f.fields_for :emergency_contacts do |uf|%>
+        <%= render 'emergency_contact_fields', :f => uf %>
+    <% end %>
+
+    <p><%= link_to_add_emergency_contact '<i class="icon-plus"></i>Add additional contact'.html_safe, f, :emergency_contacts, :class => 'btn btn-text' %></p>
+</div>
+
+<div class="control-group spaced">
+    <p><em>If something happens to me during the wurqout session, I agree to allow Wurqit to show the Guru my emergency contact’s phone number so that they might attempt to contact me in order to ensure proper medical care. The Wurqit team and I will both be notified if this occurs.</em></p>
+    <div class="push">
+        <%= f.label :emergency_contact_i_agree, :class => "checkbox inline" do %>
+            <%= f.check_box :emergency_contact_i_agree, :class => 'autosave' %> I understand and I agree
+        <% end %>
+    </div>
+</div>
+
+<div class="control-group spaced">
+    <%= f.label :medical_health_concerns, "Health Concerns", :class => "big" %>
+    <p><em>Fill in any concerns your trainer should be aware of prior to training. For example, if you are prone to fainting during heavy exercise, let your trainer know, and agree on a plan of action should this happen.</em></p>
+    <div class="push">
+        <%= f.text_area :medical_health_concerns, :class => 'autosave' %>
+    </div>
+</div>
+
+<div id="health_assessment" class="control-group">
+    <%= label_tag nil, "Optional Health Assessment", :class => "big" %>
+    <p><em>Results are not public, but may be made available to guru if necessary.</em></p>
+    <ol class="health-assess">
+        <li>
+            <%= f.label :medical_heart_condition do %>
+                <div class="selection">
+                    <%= f.check_box :medical_heart_condition, :class => 'autosave' %> Yes
+                </div>Has your doctor ever said that you have a heart condition and that you should only do physical activity recommended by a doctor?
+            <% end %>
+        </li>
+        <li>
+            <%= f.label :medical_chest_pains_physical do %>   
+                <div class="selection">
+                    <%= f.check_box :medical_chest_pains_physical, :class => 'autosave' %> Yes
+                </div>Do you feel pain in your chest when you do physical activity?
+            <% end %>
+        </li>
+        <li>
+            <%= f.label :medical_chest_pains_not_physical do %>   
+                <div class="selection">
+                    <%= f.check_box :medical_chest_pains_not_physical, :class => 'autosave' %> Yes
+                </div>In the past month, have you had chest pain when you were not doing physical activity?
+            <% end %>
+        </li>
+        <li>
+             <%= f.label :medical_lost_balance do %> 
+                <div class="selection">
+                    <%= f.check_box :medical_lost_balance, :class => 'autosave' %> Yes
+                </div>Do you lose your balance because of dizziness or do you ever lose consciousness?
+            <% end %>
+        </li>
+        <li>
+             <%= f.label :medical_joint_pain do %>
+                <div class="selection">
+                    <%= f.check_box :medical_joint_pain, :class => 'autosave' %> Yes
+                </div>Do you have a bone or joint problem that could be made worse by a change in your physical activity?
+            <% end %>
+        </li>
+        <li>
+             <%= f.label :medical_medication do %>
+                <div class="selection">
+                    <%= f.check_box :medical_medication, :class => 'autosave' %> Yes
+                </div>Is your doctor currently prescribing drugs (for example, water pills) for your blood pressure or heart condition?
+            <% end %>
+        </li>
+        <li>
+            <%= f.label :medical_other do %>
+                <div class="selection">
+                    <%= f.check_box :medical_other, :class => 'autosave' %> Yes
+                </div>Do you know of any other reason why you should not be performing physical activity?
+            <% end %>
+        </li>
+    </ol>    
+    <div class="health-notice push hide field_with_errors">
+        <label class="message">Please note, as you have answered yes to 1 or more of these questions we recommend that you consult a physician prior to using Wurqit!</label>
+    </div>
+    <div id="health-notice-modal" class="modal hide fade">
+        <div class="modal-body">
+            <p>Please note, as you have answered yes to 1 or more of these questions we recommend that you consult a physician prior to using Wurqit!</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Ok</button>
+        </div>
+    </div>
+</div>

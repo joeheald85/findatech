@@ -1,0 +1,30 @@
+<% content_for :page_head do %>
+    <h1>Change your password</h1>
+<% end %>
+
+<div class="row sessions">
+    <div class="sessions-full">
+        <div class="sessions-box">
+            <h2>Reset your password</h2>
+            <p class="up">Want to reset your password? Enter your new password below.</p>
+            <%= form_for @user, :url => password_path(resource_name), :html => { :method => :put }, :validate => true do |f| %>
+                <% flash.each do |name, msg| %>
+                    <%= content_tag :p, msg, :class => "alert alert-error flash_#{name}" if msg.length > 0 %>
+                <% end %>
+                <%= devise_error_messages! %>
+                <%= f.hidden_field :reset_password_token %>
+
+                <%= f.label :password, "New password" %>
+                <%= f.password_field :password, :validate => {:presence => true} %>
+
+                <%= f.label :password_confirmation, "Confirm new password" %>
+                <%= f.password_field :password_confirmation, :validate => {:presence => true} %>
+
+                <div class="submit">
+                    <%= f.submit "Change password", :class => "btn btn-xl btn-submit" %>
+                </div>
+            <% end %>
+            <p>Didn’t forget your password? <%= link_to 'Sign in.', new_user_session_path %></p>
+        </div>
+    </div>
+</div>
