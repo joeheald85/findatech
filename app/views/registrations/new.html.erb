@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="submit">
-                    <%= f.submit "Sign up", :class => "btn btn-xl btn-submit" %>
+                    <%= f.submit "Sign up", :class => "btn" %>
                 </div>
             <% end %>
         </div>
@@ -90,5 +90,7 @@
 		}else if( date_string.indexOf('HAST') > -1 || date_string.indexOf('HADT') > -1 ){
 			$('#user_timezone').val('Hawaii');
 		}
+		
+		$('#new_user').validate();
 	});
 </script>

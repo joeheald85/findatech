@@ -30,7 +30,7 @@ Findatech::Application.configure do
   config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   # ActionMailer default host
-  config.action_mailer.default_url_options = { :host => 'http://findatech.local' }
+  config.action_mailer.default_url_options = { :host => 'findatech.local' }
 
   # Do not compress assets
   config.assets.compress = false

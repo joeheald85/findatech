@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Findatech</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "home" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="wrapper">
+	
+	<%= render 'layouts/topbar' %>
+	<div id="content" class="xgrid">
+	
+	<%= yield %>
+	
+	</div>
+	
+	<%= render 'layouts/footer'%>
+
+</div> <!-- #wrapper -->
+
+</body>
+</html>

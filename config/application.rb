@@ -58,5 +58,17 @@ module Findatech
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # Specify all precompiled assets
+    config.assets.precompile += ['home.js']
+    
+    # Devise Layouts
+    config.to_prepare do
+      Devise::SessionsController.layout "home"
+      Devise::RegistrationsController.layout "home"
+      Devise::ConfirmationsController.layout "home"
+      Devise::UnlocksController.layout "home"
+      Devise::PasswordsController.layout "home"
+    end
   end
 end

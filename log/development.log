@@ -7264,3 +7264,1698 @@ Served asset /jquery_ujs.js - 304 Not Modified (4ms)
 Served asset /application.js - 304 Not Modified (5ms)
 Served asset /application/custom.css - 304 Not Modified (55ms)
 Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (98.7ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (207.8ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (2.9ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to DeviseCreateUsers (20130107004035)
+  [1m[35m (110.0ms)[0m  CREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(128) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (158.5ms)[0m  [1mCREATE UNIQUE INDEX `index_users_on_email` ON `users` (`email`)[0m
+  [1m[35m (144.4ms)[0m  CREATE UNIQUE INDEX `index_users_on_reset_password_token` ON `users` (`reset_password_token`)
+  [1m[36m (0.7ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20130107004035')[0m
+Migrating to AddUserFields (20130107005424)
+  [1m[35m (162.8ms)[0m  ALTER TABLE `users` ADD `username` varchar(255)
+  [1m[36m (154.6ms)[0m  [1mALTER TABLE `users` ADD `full_name` varchar(255)[0m
+  [1m[35m (122.6ms)[0m  ALTER TABLE `users` ADD `bio` varchar(255)
+  [1m[36m (121.1ms)[0m  [1mALTER TABLE `users` ADD `city` varchar(255)[0m
+  [1m[35m (123.7ms)[0m  ALTER TABLE `users` ADD `state` varchar(255)
+  [1m[36m (122.0ms)[0m  [1mALTER TABLE `users` ADD `zip` varchar(255)[0m
+  [1m[35m (134.2ms)[0m  ALTER TABLE `users` ADD `lat` decimal
+  [1m[36m (134.2ms)[0m  [1mALTER TABLE `users` ADD `lon` decimal[0m
+  [1m[35m (133.1ms)[0m  ALTER TABLE `users` ADD `distance` decimal
+  [1m[36m (133.9ms)[0m  [1mALTER TABLE `users` ADD `rate` decimal(8,2)[0m
+  [1m[35m (0.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20130107005424')
+Migrating to CreateRoles (20130107010220)
+  [1m[36m (126.9ms)[0m  [1mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `role` varchar(255)) ENGINE=InnoDB[0m
+  [1m[35m (120.6ms)[0m  CREATE TABLE `user_roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11), `role_id` int(11)) ENGINE=InnoDB
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20130107010220')[0m
+Migrating to AddUserTimezoneAndActive (20130107035746)
+  [1m[35m (122.6ms)[0m  ALTER TABLE `users` ADD `timezone` varchar(255)
+  [1m[36m (132.5ms)[0m  [1mALTER TABLE `users` ADD `active` tinyint(1) DEFAULT 1[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20130107035746')
+Migrating to CreateAppointments (20130107043109)
+  [1m[36m (117.0ms)[0m  [1mCREATE TABLE `appointments` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11), `tech_id` int(11), `review_id` int(11), `status` varchar(255), `description` varchar(255), `appointment_time` datetime, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20130107043109')
+  [1m[36m (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-01-07 09:26:23 -0500
+Processing by HomeController#index as HTML
+Geokit is using the domain: findatech.local
+  Rendered home/index.html.erb within layouts/application (4.8ms)
+Compiled jquery.js  (4ms)  (pid 26553)
+Compiled jquery-ui.js  (10ms)  (pid 26553)
+Compiled jquery_ujs.js  (0ms)  (pid 26553)
+Compiled rails.validations.js  (0ms)  (pid 26553)
+Compiled jquery-week-calendar.js  (2ms)  (pid 26553)
+Compiled bootstrap-dropdown.js  (0ms)  (pid 26553)
+Compiled bootstrap-tooltip.js  (0ms)  (pid 26553)
+Compiled bootstrap-popover.js  (0ms)  (pid 26553)
+Compiled bootstrap-transition.js  (0ms)  (pid 26553)
+Compiled bootstrap-modal.js  (0ms)  (pid 26553)
+Compiled application.js  (353ms)  (pid 26553)
+  Rendered layouts/_topbar.html.erb (2.0ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 555ms (Views: 553.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:23 -0500
+Served asset /application.css - 200 OK (39ms)
+
+
+Started GET "/assets/application/buttons.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:23 -0500
+Served asset /application/buttons.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:23 -0500
+Served asset /application/custom.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/form.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:23 -0500
+Served asset /application/form.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:23 -0500
+Served asset /application/grid.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/jqueryui-icons.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/jqueryui-icons.css - 200 OK (45ms)
+
+
+Started GET "/assets/application/layout.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/layout.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/login.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/login.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/mini-pricing-grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/mini-pricing-grid.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/plugin.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/plugin.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/plugin/dataTables.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/plugin/dataTables.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/plugin/facebox.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/plugin/facebox.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/plugin/jquery.lightbox-0.5.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/plugin/jquery.lightbox-0.5.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/plugin/jquery.visualize.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/plugin/jquery.visualize.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/plugin/tipsy.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/plugin/tipsy.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/plugin/uniform.default.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/plugin/uniform.default.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/redmond/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/redmond/jquery-ui-1.8.6.custom.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/reset.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/reset.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/smoothness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/smoothness/jquery-ui-1.8.6.custom.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/start/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/start/jquery-ui-1.8.6.custom.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/text.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/text.css - 200 OK (3ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.12.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.12.custom.css - 200 OK (2ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.6.custom.css - 200 OK (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /jquery.js - 200 OK (4ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /jquery-ui.js - 200 OK (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /jquery_ujs.js - 200 OK (5ms)
+
+
+Started GET "/assets/rails.validations.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /rails.validations.js - 200 OK (3ms)
+
+
+Started GET "/assets/jquery/jquery.placeholder.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /jquery/jquery.placeholder.js - 200 OK (3ms)
+
+
+Started GET "/assets/jquery/jquery.slickswitch.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /jquery/jquery.slickswitch.js - 200 OK (2ms)
+
+
+Started GET "/assets/jquery/jquery.iframe-transport.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /jquery/jquery.iframe-transport.js - 200 OK (3ms)
+
+
+Started GET "/assets/jquery/jquery.fileupload.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /jquery/jquery.fileupload.js - 200 OK (3ms)
+
+
+Started GET "/assets/jquery/jquery.validate.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /jquery/jquery.validate.min.js - 200 OK (4ms)
+
+
+Started GET "/assets/jquery-week-calendar.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /jquery-week-calendar.js - 200 OK (6ms)
+
+
+Started GET "/assets/jquery/jquery.raty.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /jquery/jquery.raty.min.js - 200 OK (3ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /bootstrap-dropdown.js - 200 OK (4ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /bootstrap-tooltip.js - 200 OK (5ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /bootstrap-popover.js - 200 OK (3ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /bootstrap-transition.js - 200 OK (3ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /bootstrap-modal.js - 200 OK (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application.js - 200 OK (71ms)
+
+
+Started GET "/assets/application/ui-darkness/images/ui-icons_ffffff_256x240.png" for 127.0.0.1 at 2013-01-07 09:26:24 -0500
+Served asset /application/ui-darkness/images/ui-icons_ffffff_256x240.png - 200 OK (2ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2013-01-07 09:26:27 -0500
+Processing by Devise::SessionsController#new as HTML
+Geokit is using the domain: findatech.local
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/devise-1.5.3/app/views/devise/shared/_links.erb (2.0ms)
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/devise-1.5.3/app/views/devise/sessions/new.html.erb within layouts/application (107.3ms)
+  Rendered layouts/_topbar.html.erb (0.5ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 218ms (Views: 179.3ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2013-01-07 09:26:37 -0500
+Processing by RegistrationsController#new as HTML
+Geokit is using the domain: findatech.local
+  Rendered registrations/new.html.erb within layouts/application (880.3ms)
+  Rendered layouts/_topbar.html.erb (0.5ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 953ms (Views: 951.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/rails.validations.js?body=1" for 127.0.0.1 at 2013-01-07 09:26:38 -0500
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/images/bg-lite.png" for 127.0.0.1 at 2013-01-07 09:26:38 -0500
+Served asset /images/bg-lite.png - 404 Not Found (10ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/images/bg-lite.png"):
+  actionpack (3.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.8) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.8) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.8) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.8) lib/rails/engine.rb:479:in `call'
+  railties (3.2.8) lib/rails/application.rb:223:in `call'
+  railties (3.2.8) lib/rails/railtie/configurable.rb:30:in `method_missing'
+  passenger (3.0.18) lib/phusion_passenger/rack/request_handler.rb:96:in `process_request'
+  passenger (3.0.18) lib/phusion_passenger/abstract_request_handler.rb:516:in `accept_and_process_next_request'
+  passenger (3.0.18) lib/phusion_passenger/abstract_request_handler.rb:274:in `main_loop'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:206:in `start_request_handler'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:171:in `block in handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/utils.rb:470:in `safe_fork'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:166:in `handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:357:in `server_main_loop'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:206:in `start_synchronously'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:180:in `start'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:129:in `start'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:253:in `block (2 levels) in spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:132:in `lookup_or_add'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:246:in `block in spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:82:in `block in synchronize'
+  <internal:prelude>:10:in `synchronize'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:79:in `synchronize'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:244:in `spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:137:in `spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:275:in `handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:357:in `server_main_loop'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:206:in `start_synchronously'
+  passenger (3.0.18) helper-scripts/passenger-spawn-server:99:in `<main>'
+
+
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/actionpack-3.2.8/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+Connecting to database specified by database.yml
+  [1m[36m (2.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35mRole Load (0.3ms)[0m  SELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'admin' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `roles` (`role`) VALUES ('admin')
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mRole Load (0.3ms)[0m  SELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'user' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `roles` (`role`) VALUES ('user')
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mRole Load (0.2ms)[0m  SELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'tech' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO `roles` (`role`) VALUES ('tech')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`email` = 'admin@fat.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'admin@fat.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'admin@fat.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 AS one FROM `users` WHERE `users`.`username` = BINARY 'admin' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `users` (`active`, `bio`, `city`, `created_at`, `current_sign_in_at`, `current_sign_in_ip`, `distance`, `email`, `encrypted_password`, `full_name`, `last_sign_in_at`, `last_sign_in_ip`, `lat`, `lon`, `rate`, `remember_created_at`, `reset_password_sent_at`, `reset_password_token`, `sign_in_count`, `state`, `timezone`, `updated_at`, `username`, `zip`) VALUES (1, NULL, NULL, '2013-01-07 14:26:49', NULL, NULL, NULL, 'admin@fat.com', '$2a$10$TYLY0zJezc8iDjWWOouXp.m1RJimvPTLsI.YC/Rdm6/w7O/3Ne79e', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2013-01-07 14:26:49', 'admin', NULL)[0m
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36mRole Load (0.3ms)[0m  [1mSELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'admin' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `user_roles` (`role_id`, `user_id`) VALUES (1, 1)[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+Connecting to database specified by database.yml
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2013-01-07 09:32:32 -0500
+Processing by RegistrationsController#new as HTML
+Geokit is using the domain: findatech.local
+  Rendered registrations/new.html.erb within layouts/application (509.9ms)
+  Rendered layouts/_topbar.html.erb (1.6ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 785ms (Views: 741.1ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:32 -0500
+Served asset /application.css - 304 Not Modified (41ms)
+
+
+Started GET "/assets/application/buttons.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/buttons.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/form.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/form.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/grid.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/jqueryui-icons.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/jqueryui-icons.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/layout.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/layout.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/login.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/login.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/mini-pricing-grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/mini-pricing-grid.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/plugin.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/plugin.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/plugin/dataTables.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/plugin/dataTables.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/plugin/facebox.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/plugin/facebox.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/plugin/jquery.lightbox-0.5.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/plugin/jquery.lightbox-0.5.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/plugin/jquery.visualize.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/plugin/jquery.visualize.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/plugin/tipsy.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/plugin/tipsy.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/plugin/uniform.default.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/plugin/uniform.default.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/redmond/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/redmond/jquery-ui-1.8.6.custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/reset.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/reset.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application/smoothness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/smoothness/jquery-ui-1.8.6.custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/start/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/start/jquery-ui-1.8.6.custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/text.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/text.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.12.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.12.custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.6.custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /jquery.js - 304 Not Modified (49ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /jquery-ui.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/rails.validations.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /rails.validations.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery/jquery.placeholder.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /jquery/jquery.placeholder.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery/jquery.slickswitch.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /jquery/jquery.slickswitch.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery/jquery.iframe-transport.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /jquery/jquery.iframe-transport.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery/jquery.fileupload.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /jquery/jquery.fileupload.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery/jquery.validate.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /jquery/jquery.validate.min.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery-week-calendar.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /jquery-week-calendar.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/jquery/jquery.raty.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /jquery/jquery.raty.min.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /bootstrap-dropdown.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /bootstrap-tooltip.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /bootstrap-popover.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /bootstrap-transition.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /bootstrap-modal.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-01-07 09:32:33 -0500
+Served asset /application.js - 304 Not Modified (33ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Processing by RegistrationsController#new as HTML
+Geokit is using the domain: findatech.local
+  Rendered registrations/new.html.erb within layouts/application (20.7ms)
+  Rendered layouts/_topbar.html.erb (0.5ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 98ms (Views: 96.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/application/buttons.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/buttons.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/form.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/form.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/grid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/jqueryui-icons.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/jqueryui-icons.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/layout.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/layout.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/login.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/login.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/mini-pricing-grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/mini-pricing-grid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/plugin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/dataTables.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/plugin/dataTables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/facebox.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/plugin/facebox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/jquery.lightbox-0.5.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/plugin/jquery.lightbox-0.5.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/jquery.visualize.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/plugin/jquery.visualize.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/tipsy.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/plugin/tipsy.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/uniform.default.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/plugin/uniform.default.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/redmond/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/redmond/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/reset.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/reset.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/smoothness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/smoothness/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/start/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/start/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/text.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/text.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.12.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.12.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /jquery-ui.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rails.validations.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.placeholder.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /jquery/jquery.placeholder.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.slickswitch.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /jquery/jquery.slickswitch.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.iframe-transport.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /jquery/jquery.iframe-transport.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.fileupload.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /jquery/jquery.fileupload.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.validate.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /jquery/jquery.validate.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-week-calendar.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /jquery-week-calendar.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.raty.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /jquery/jquery.raty.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:31 -0500
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:32 -0500
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:32 -0500
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-01-07 09:35:32 -0500
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"K6waEFqf+ecn9K0kXFrwklKkqLTxMH0UekbLazzgp+8=", "user"=>{"email"=>"joeheald85@gmail.com", "full_name"=>"Joseph Heald", "username"=>"joe chef", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "city"=>"Egg Harbor Township", "state"=>"New Jersey", "zip"=>"08234", "timezone"=>"Eastern Time (US & Canada)", "rate"=>"50", "distance"=>"20"}, "role"=>{"tech"=>"1"}, "commit"=>"Sign up"}
+Geokit is using the domain: findatech.local
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'joeheald85@gmail.com' LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'joeheald85@gmail.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT 1 AS one FROM `users` WHERE `users`.`username` = BINARY 'joe chef' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  Rendered registrations/new.html.erb within layouts/application (20.4ms)
+  Rendered layouts/_topbar.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+  [1m[35mRole Load (0.3ms)[0m  SELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'tech' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (2.8ms)[0m  INSERT INTO `users` (`active`, `bio`, `city`, `created_at`, `current_sign_in_at`, `current_sign_in_ip`, `distance`, `email`, `encrypted_password`, `full_name`, `last_sign_in_at`, `last_sign_in_ip`, `lat`, `lon`, `rate`, `remember_created_at`, `reset_password_sent_at`, `reset_password_token`, `sign_in_count`, `state`, `timezone`, `updated_at`, `username`, `zip`) VALUES (1, NULL, 'Egg Harbor Township', '2013-01-07 14:49:03', NULL, NULL, 20, 'joeheald85@gmail.com', '$2a$10$I.H6WeRPyeKdqMR7/VIQR.9nrJZ9s/iNQt0vGuI/nhH8eNRFxAdsS', 'Joseph Heald', NULL, NULL, NULL, NULL, 50.0, NULL, NULL, NULL, 0, 'New Jersey', 'Eastern Time (US & Canada)', '2013-01-07 14:49:03', 'joe chef', '08234')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `user_roles` (`role_id`, `user_id`) VALUES (3, 2)[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+Completed 200 OK in 539ms (Views: 51.6ms | ActiveRecord: 8.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application.css - 304 Not Modified (12ms)
+
+
+Started GET "/assets/application/buttons.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application/buttons.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application/custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/form.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application/form.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application/grid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/jqueryui-icons.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application/jqueryui-icons.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/layout.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application/layout.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/login.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application/login.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/mini-pricing-grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application/mini-pricing-grid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application/plugin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/dataTables.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:03 -0500
+Served asset /application/plugin/dataTables.css - 304 Not Modified (42ms)
+
+
+Started GET "/assets/application/plugin/facebox.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/plugin/facebox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/jquery.lightbox-0.5.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/plugin/jquery.lightbox-0.5.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/jquery.visualize.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/plugin/jquery.visualize.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/tipsy.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/plugin/tipsy.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/uniform.default.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/plugin/uniform.default.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/redmond/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/redmond/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/reset.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/reset.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/smoothness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/smoothness/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/start/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/start/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/text.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/text.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.12.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.12.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /jquery-ui.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rails.validations.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.placeholder.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /jquery/jquery.placeholder.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.slickswitch.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /jquery/jquery.slickswitch.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.iframe-transport.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /jquery/jquery.iframe-transport.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.fileupload.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /jquery/jquery.fileupload.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.validate.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /jquery/jquery.validate.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-week-calendar.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /jquery-week-calendar.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.raty.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /jquery/jquery.raty.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-01-07 09:49:04 -0500
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2013-01-07 09:49:55 -0500
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"K6waEFqf+ecn9K0kXFrwklKkqLTxMH0UekbLazzgp+8=", "user"=>{"email"=>"admin@fat.com", "full_name"=>"Joseph Heald", "username"=>"joe chef", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "city"=>"Egg Harbor Township", "state"=>"New Jersey", "zip"=>"08234", "timezone"=>"Eastern Time (US & Canada)", "rate"=>"50", "distance"=>"0"}, "commit"=>"Sign up"}
+Geokit is using the domain: findatech.local
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'admin@fat.com' LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'admin@fat.com' LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT 1 AS one FROM `users` WHERE `users`.`username` = BINARY 'joe chef' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  Rendered registrations/new.html.erb within layouts/application (19.8ms)
+  Rendered layouts/_topbar.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 500 Internal Server Error in 347ms
+
+NoMethodError (undefined method `[]' for nil:NilClass):
+  app/controllers/registrations_controller.rb:5:in `create'
+
+
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/actionpack-3.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/actionpack-3.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.5ms)
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/actionpack-3.2.8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.1ms)
+
+
+Started GET "/assets/application/custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/jqueryui-icons.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/jqueryui-icons.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/form.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/form.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/buttons.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/buttons.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/application/grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/grid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/login.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/login.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/layout.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/layout.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/mini-pricing-grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/mini-pricing-grid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/plugin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/jquery.visualize.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/plugin/jquery.visualize.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/facebox.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/plugin/facebox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/uniform.default.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/plugin/uniform.default.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/jquery.lightbox-0.5.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/plugin/jquery.lightbox-0.5.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/smoothness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/smoothness/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/tipsy.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/plugin/tipsy.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/redmond/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/redmond/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/dataTables.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/plugin/dataTables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/text.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/text.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/reset.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/reset.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.12.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.12.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/start/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application/start/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /jquery-ui.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rails.validations.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.fileupload.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /jquery/jquery.fileupload.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.slickswitch.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /jquery/jquery.slickswitch.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.raty.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /jquery/jquery.raty.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.iframe-transport.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /jquery/jquery.iframe-transport.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.placeholder.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /jquery/jquery.placeholder.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.validate.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /jquery/jquery.validate.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-week-calendar.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /jquery-week-calendar.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /bootstrap-popover.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:41 -0500
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Processing by RegistrationsController#new as HTML
+Geokit is using the domain: findatech.local
+  Rendered registrations/new.html.erb within layouts/application (28.1ms)
+  Rendered layouts/_topbar.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 188ms (Views: 128.6ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/assets/application/buttons.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/buttons.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application.css - 304 Not Modified (12ms)
+
+
+Started GET "/assets/application/form.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/form.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/jqueryui-icons.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/jqueryui-icons.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/grid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/layout.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/layout.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/plugin.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/login.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/login.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/dataTables.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/plugin/dataTables.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/jquery.visualize.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/plugin/jquery.visualize.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/facebox.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/plugin/facebox.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/jquery.lightbox-0.5.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/plugin/jquery.lightbox-0.5.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/mini-pricing-grid.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/mini-pricing-grid.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/redmond/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/redmond/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/uniform.default.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/plugin/uniform.default.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/plugin/tipsy.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/plugin/tipsy.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/text.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/text.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/start/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/start/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.12.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.12.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/reset.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/reset.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /jquery-ui.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.placeholder.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /jquery/jquery.placeholder.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/smoothness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application/smoothness/jquery-ui-1.8.6.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.iframe-transport.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /jquery/jquery.iframe-transport.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.slickswitch.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /jquery/jquery.slickswitch.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery-week-calendar.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /jquery-week-calendar.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.fileupload.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /jquery/jquery.fileupload.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/rails.validations.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.raty.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /jquery/jquery.raty.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery/jquery.validate.min.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /jquery/jquery.validate.min.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /application.js - 304 Not Modified (10ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-01-07 09:51:46 -0500
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2013-01-07 09:52:25 -0500
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"K6waEFqf+ecn9K0kXFrwklKkqLTxMH0UekbLazzgp+8=", "user"=>{"email"=>"admin@fat.com", "full_name"=>"Joseph Heald", "username"=>"holla", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "city"=>"Egg Harbor Township", "state"=>"New Jersey", "zip"=>"08234", "timezone"=>"Eastern Time (US & Canada)", "rate"=>"", "distance"=>"0"}, "commit"=>"Sign up"}
+Geokit is using the domain: findatech.local
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'admin@fat.com' LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'admin@fat.com' LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM `users` WHERE `users`.`username` = BINARY 'holla' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  Rendered registrations/new.html.erb within layouts/application (20.0ms)
+  Rendered layouts/_topbar.html.erb (0.5ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+  [1m[36mRole Load (0.2ms)[0m  [1mSELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'user' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO `users` (`active`, `bio`, `city`, `created_at`, `current_sign_in_at`, `current_sign_in_ip`, `distance`, `email`, `encrypted_password`, `full_name`, `last_sign_in_at`, `last_sign_in_ip`, `lat`, `lon`, `rate`, `remember_created_at`, `reset_password_sent_at`, `reset_password_token`, `sign_in_count`, `state`, `timezone`, `updated_at`, `username`, `zip`) VALUES (1, NULL, 'Egg Harbor Township', '2013-01-07 14:52:25', NULL, NULL, 0, 'admin@fat.com', '$2a$10$.g/WQC25tV4P8Tcgj//xc.t7vWQO8W98xdQKJ7q1eEJBQylDtoiQK', 'Joseph Heald', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'New Jersey', 'Eastern Time (US & Canada)', '2013-01-07 14:52:25', 'holla', '08234')[0m
+Mysql2::Error: Duplicate entry 'admin@fat.com' for key 'index_users_on_email': INSERT INTO `users` (`active`, `bio`, `city`, `created_at`, `current_sign_in_at`, `current_sign_in_ip`, `distance`, `email`, `encrypted_password`, `full_name`, `last_sign_in_at`, `last_sign_in_ip`, `lat`, `lon`, `rate`, `remember_created_at`, `reset_password_sent_at`, `reset_password_token`, `sign_in_count`, `state`, `timezone`, `updated_at`, `username`, `zip`) VALUES (1, NULL, 'Egg Harbor Township', '2013-01-07 14:52:25', NULL, NULL, 0, 'admin@fat.com', '$2a$10$.g/WQC25tV4P8Tcgj//xc.t7vWQO8W98xdQKJ7q1eEJBQylDtoiQK', 'Joseph Heald', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'New Jersey', 'Eastern Time (US & Canada)', '2013-01-07 14:52:25', 'holla', '08234')
+  [1m[35m (0.4ms)[0m  ROLLBACK
+Completed 500 Internal Server Error in 428ms
+
+ActiveRecord::RecordNotUnique (Mysql2::Error: Duplicate entry 'admin@fat.com' for key 'index_users_on_email': INSERT INTO `users` (`active`, `bio`, `city`, `created_at`, `current_sign_in_at`, `current_sign_in_ip`, `distance`, `email`, `encrypted_password`, `full_name`, `last_sign_in_at`, `last_sign_in_ip`, `lat`, `lon`, `rate`, `remember_created_at`, `reset_password_sent_at`, `reset_password_token`, `sign_in_count`, `state`, `timezone`, `updated_at`, `username`, `zip`) VALUES (1, NULL, 'Egg Harbor Township', '2013-01-07 14:52:25', NULL, NULL, 0, 'admin@fat.com', '$2a$10$.g/WQC25tV4P8Tcgj//xc.t7vWQO8W98xdQKJ7q1eEJBQylDtoiQK', 'Joseph Heald', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'New Jersey', 'Eastern Time (US & Canada)', '2013-01-07 14:52:25', 'holla', '08234')):
+  app/controllers/registrations_controller.rb:6:in `create'
+
+
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/actionpack-3.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/actionpack-3.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/actionpack-3.2.8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.4ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2013-01-07 10:30:36 -0500
+Processing by RegistrationsController#new as HTML
+Geokit is using the domain: findatech.local
+  Rendered registrations/new.html.erb within layouts/home (906.6ms)
+Compiled rails.validations.js  (0ms)  (pid 27964)
+Compiled home.js  (71ms)  (pid 27964)
+  Rendered layouts/_topbar.html.erb (2.7ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 1153ms (Views: 1113.2ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/buttons.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/form.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/jqueryui-icons.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/grid.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/buttons.css - 304 Not Modified (20ms)
+
+
+Started GET "/assets/application/layout.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/form.css - 304 Not Modified (10ms)
+Served asset /application/layout.css - 304 Not Modified (4ms)
+Served asset /application/custom.css - 304 Not Modified (10ms)
+
+
+Started GET "/assets/application/login.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/jqueryui-icons.css - 304 Not Modified (10ms)
+
+
+Started GET "/assets/application/mini-pricing-grid.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/login.css - 304 Not Modified (9ms)
+
+
+Started GET "/assets/application/plugin.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/plugin/dataTables.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/mini-pricing-grid.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application/plugin/facebox.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/plugin/dataTables.css - 304 Not Modified (5ms)
+Served asset /application/plugin.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/application/plugin/jquery.visualize.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/plugin/jquery.lightbox-0.5.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/grid.css - 304 Not Modified (11ms)
+
+
+Started GET "/assets/application/plugin/tipsy.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/plugin/facebox.css - 304 Not Modified (5ms)
+Served asset /application/plugin/jquery.visualize.css - 304 Not Modified (4ms)
+Served asset /application.css - 304 Not Modified (249ms)
+Served asset /home.js - 200 OK (36ms)
+Served asset /application/plugin/jquery.lightbox-0.5.css - 304 Not Modified (6ms)
+
+
+Started GET "/assets/application/plugin/uniform.default.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/smoothness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/plugin/tipsy.css - 304 Not Modified (6ms)
+
+
+Started GET "/assets/application/redmond/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/reset.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/start/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/application/text.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/plugin/uniform.default.css - 304 Not Modified (4ms)
+Served asset /application/reset.css - 304 Not Modified (4ms)
+Served asset /application/redmond/jquery-ui-1.8.6.custom.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.12.custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/smoothness/jquery-ui-1.8.6.custom.css - 304 Not Modified (9ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/start/jquery-ui-1.8.6.custom.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/rails.validations.js?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.12.custom.css - 304 Not Modified (5ms)
+Served asset /application/ui-darkness/jquery-ui-1.8.6.custom.css - 304 Not Modified (7ms)
+Served asset /jquery.js - 304 Not Modified (8ms)
+
+
+Started GET "/assets/jquery/jquery.placeholder.js?body=1" for 127.0.0.1 at 2013-01-07 10:30:37 -0500
+Served asset /rails.validations.js - 200 OK (6ms)
+Served asset /jquery_ujs.js - 304 Not Modified (11ms)
+Served asset /jquery/jquery.placeholder.js - 304 Not Modified (4ms)
+Served asset /application/text.css - 304 Not Modified (72ms)
+
+
+Started GET "/validators/uniqueness?case_sensitive=true&user%5Bemail%5D=joeheald85%40gmail.com&_=1357572644966" for 127.0.0.1 at 2013-01-07 10:30:44 -0500
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT 1 AS one FROM `users` WHERE (BINARY `users`.`email` = 'joeheald85@gmail.com' AND `users`.`id` IS NOT NULL) LIMIT 1[0m
+
+
+Started GET "/validators/uniqueness?case_sensitive=true&user%5Bemail%5D=joeheald5%40gmail.com&_=1357572670249" for 127.0.0.1 at 2013-01-07 10:31:10 -0500
+  [1m[35mUser Exists (0.3ms)[0m  SELECT 1 AS one FROM `users` WHERE (BINARY `users`.`email` = 'joeheald5@gmail.com' AND `users`.`id` IS NOT NULL) LIMIT 1
+
+
+Started GET "/validators/uniqueness?case_sensitive=true&user%5Busername%5D=joejeojje&_=1357572680642" for 127.0.0.1 at 2013-01-07 10:31:20 -0500
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM `users` WHERE (BINARY `users`.`username` = 'joejeojje' AND `users`.`id` IS NOT NULL) LIMIT 1[0m
+
+
+Started POST "/users" for 127.0.0.1 at 2013-01-07 10:31:43 -0500
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"K6waEFqf+ecn9K0kXFrwklKkqLTxMH0UekbLazzgp+8=", "user"=>{"email"=>"joeheald5@gmail.com", "full_name"=>"joe h", "username"=>"joejeojje", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "city"=>"city", "state"=>"Alaska", "zip"=>"47547", "timezone"=>"Eastern Time (US & Canada)", "rate"=>"", "distance"=>"0"}, "commit"=>"Sign up"}
+Geokit is using the domain: findatech.local
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'joeheald5@gmail.com' LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'joeheald5@gmail.com' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM `users` WHERE `users`.`username` = BINARY 'joejeojje' LIMIT 1[0m
+  [1m[35mSQL (2.8ms)[0m  INSERT INTO `users` (`active`, `bio`, `city`, `created_at`, `current_sign_in_at`, `current_sign_in_ip`, `distance`, `email`, `encrypted_password`, `full_name`, `last_sign_in_at`, `last_sign_in_ip`, `lat`, `lon`, `rate`, `remember_created_at`, `reset_password_sent_at`, `reset_password_token`, `sign_in_count`, `state`, `timezone`, `updated_at`, `username`, `zip`) VALUES (1, NULL, 'city', '2013-01-07 15:31:44', NULL, NULL, 0, 'joeheald5@gmail.com', '$2a$10$3E7Og7dj8L.u/jMxqG.KFuouoaL/Ma3AH4rkldPXFE9D6DfmTK3k2', 'joe h', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Alaska', 'Eastern Time (US & Canada)', '2013-01-07 15:31:44', 'joejeojje', '47547')
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mUPDATE `users` SET `last_sign_in_at` = '2013-01-07 15:31:44', `current_sign_in_at` = '2013-01-07 15:31:44', `last_sign_in_ip` = '127.0.0.1', `current_sign_in_ip` = '127.0.0.1', `sign_in_count` = 1, `updated_at` = '2013-01-07 15:31:44' WHERE `users`.`id` = 4[0m
+  [1m[35m (1.0ms)[0m  COMMIT
+  [1m[36mRole Load (0.3ms)[0m  [1mSELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'admin' LIMIT 1[0m
+  [1m[35mRole Exists (0.3ms)[0m  SELECT 1 AS one FROM `roles` INNER JOIN `user_roles` ON `roles`.`id` = `user_roles`.`role_id` WHERE `user_roles`.`user_id` = 4 AND `roles`.`id` = 1 LIMIT 1
+Redirected to http://findatech.local/users/dashboard
+  [1m[36mRole Load (0.4ms)[0m  [1mSELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'user' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `user_roles` (`role_id`, `user_id`) VALUES (2, 4)[0m
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Completed 302 Found in 528ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/users/dashboard" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Processing by UsersController#dashboard as HTML
+Geokit is using the domain: findatech.local
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  [1m[35mRole Load (0.4ms)[0m  SELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'admin' LIMIT 1
+  [1m[36mRole Exists (0.4ms)[0m  [1mSELECT 1 AS one FROM `roles` INNER JOIN `user_roles` ON `roles`.`id` = `user_roles`.`role_id` WHERE `user_roles`.`user_id` = 4 AND `roles`.`id` = 1 LIMIT 1[0m
+  Rendered users/dashboard.html.erb within layouts/application (3.5ms)
+Compiled bootstrap-dropdown.js  (0ms)  (pid 27967)
+Compiled bootstrap-tooltip.js  (0ms)  (pid 27967)
+Compiled bootstrap-popover.js  (0ms)  (pid 27967)
+Compiled bootstrap-transition.js  (0ms)  (pid 27967)
+Compiled bootstrap-modal.js  (0ms)  (pid 27967)
+Compiled application.js  (138ms)  (pid 27967)
+  [1m[35mRole Load (0.3ms)[0m  SELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'tech' LIMIT 1
+  [1m[36mRole Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM `roles` INNER JOIN `user_roles` ON `roles`.`id` = `user_roles`.`role_id` WHERE `user_roles`.`user_id` = 4 AND `roles`.`id` = 3 LIMIT 1[0m
+  [1m[35mRole Load (0.2ms)[0m  SELECT `roles`.* FROM `roles` WHERE `roles`.`role` = 'user' LIMIT 1
+  [1m[36mRole Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM `roles` INNER JOIN `user_roles` ON `roles`.`id` = `user_roles`.`role_id` WHERE `user_roles`.`user_id` = 4 AND `roles`.`id` = 2 LIMIT 1[0m
+  [1m[35mAppointment Load (0.2ms)[0m  SELECT `appointments`.* FROM `appointments` WHERE (status = 'unconfirmed' and user_id = 4)
+  Rendered layouts/_topbar.html.erb (15.9ms)
+  Rendered layouts/_nav.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 356ms (Views: 328.5ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application.css - 304 Not Modified (43ms)
+
+
+Started GET "/assets/application/buttons.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/buttons.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/custom.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application/form.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/form.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/grid.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/grid.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/jqueryui-icons.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/jqueryui-icons.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application/layout.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/layout.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/login.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/login.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/mini-pricing-grid.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/mini-pricing-grid.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application/plugin.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/plugin.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application/plugin/dataTables.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/plugin/dataTables.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/plugin/facebox.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:44 -0500
+Served asset /application/plugin/facebox.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/plugin/jquery.lightbox-0.5.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/plugin/jquery.lightbox-0.5.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/plugin/jquery.visualize.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/plugin/jquery.visualize.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application/plugin/tipsy.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/plugin/tipsy.css - 304 Not Modified (46ms)
+
+
+Started GET "/assets/application/plugin/uniform.default.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/plugin/uniform.default.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/redmond/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/redmond/jquery-ui-1.8.6.custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/reset.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/reset.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/smoothness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/smoothness/jquery-ui-1.8.6.custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/start/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/start/jquery-ui-1.8.6.custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/text.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/text.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.12.custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.12.custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application/ui-darkness/jquery-ui-1.8.6.custom.css?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/ui-darkness/jquery-ui-1.8.6.custom.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /jquery.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery-ui.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /jquery-ui.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /jquery_ujs.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/jquery/jquery.placeholder.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /jquery/jquery.placeholder.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery/jquery.slickswitch.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /jquery/jquery.slickswitch.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery/jquery.iframe-transport.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /jquery/jquery.iframe-transport.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery/jquery.fileupload.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /jquery/jquery.fileupload.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery/jquery.validate.min.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /jquery/jquery.validate.min.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery-week-calendar.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /jquery-week-calendar.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery/jquery.raty.min.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /jquery/jquery.raty.min.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /bootstrap-dropdown.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /bootstrap-tooltip.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /bootstrap-popover.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /bootstrap-transition.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /bootstrap-modal.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application.js - 304 Not Modified (29ms)
+
+
+Started GET "/assets/images/logo.png" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /images/logo.png - 404 Not Found (58ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/images/logo.png"):
+  actionpack (3.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.8) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.8) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.8) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.2) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.8) lib/rails/engine.rb:479:in `call'
+  railties (3.2.8) lib/rails/application.rb:223:in `call'
+  railties (3.2.8) lib/rails/railtie/configurable.rb:30:in `method_missing'
+  passenger (3.0.18) lib/phusion_passenger/rack/request_handler.rb:96:in `process_request'
+  passenger (3.0.18) lib/phusion_passenger/abstract_request_handler.rb:516:in `accept_and_process_next_request'
+  passenger (3.0.18) lib/phusion_passenger/abstract_request_handler.rb:274:in `main_loop'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:206:in `start_request_handler'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:171:in `block in handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/utils.rb:470:in `safe_fork'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:166:in `handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:357:in `server_main_loop'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:206:in `start_synchronously'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:180:in `start'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:129:in `start'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:253:in `block (2 levels) in spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:132:in `lookup_or_add'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:246:in `block in spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:82:in `block in synchronize'
+  <internal:prelude>:10:in `synchronize'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:79:in `synchronize'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:244:in `spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:137:in `spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:275:in `handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:357:in `server_main_loop'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:206:in `start_synchronously'
+  passenger (3.0.18) helper-scripts/passenger-spawn-server:99:in `<main>'
+
+
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/actionpack-3.2.8/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/assets/images/el_bg.png" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /images/el_bg.png - 404 Not Found (10ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/images/el_bg.png"):
+  actionpack (3.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.8) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.8) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.8) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.2) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.8) lib/rails/engine.rb:479:in `call'
+  railties (3.2.8) lib/rails/application.rb:223:in `call'
+  railties (3.2.8) lib/rails/railtie/configurable.rb:30:in `method_missing'
+  passenger (3.0.18) lib/phusion_passenger/rack/request_handler.rb:96:in `process_request'
+  passenger (3.0.18) lib/phusion_passenger/abstract_request_handler.rb:516:in `accept_and_process_next_request'
+  passenger (3.0.18) lib/phusion_passenger/abstract_request_handler.rb:274:in `main_loop'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:206:in `start_request_handler'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:171:in `block in handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/utils.rb:470:in `safe_fork'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:166:in `handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:357:in `server_main_loop'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:206:in `start_synchronously'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:180:in `start'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:129:in `start'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:253:in `block (2 levels) in spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:132:in `lookup_or_add'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:246:in `block in spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:82:in `block in synchronize'
+  <internal:prelude>:10:in `synchronize'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:79:in `synchronize'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:244:in `spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:137:in `spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:275:in `handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:357:in `server_main_loop'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:206:in `start_synchronously'
+  passenger (3.0.18) helper-scripts/passenger-spawn-server:99:in `<main>'
+
+
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/actionpack-3.2.8/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/assets/application/ui-darkness/images/ui-icons_222222_256x240.png" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/ui-darkness/images/ui-icons_222222_256x240.png - 200 OK (2ms)
+
+
+Started GET "/assets/images/down_arrow.png" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /images/down_arrow.png - 404 Not Found (7ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/images/down_arrow.png"):
+  actionpack (3.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.8) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.8) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.8) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.2) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.8) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.8) lib/rails/engine.rb:479:in `call'
+  railties (3.2.8) lib/rails/application.rb:223:in `call'
+  railties (3.2.8) lib/rails/railtie/configurable.rb:30:in `method_missing'
+  passenger (3.0.18) lib/phusion_passenger/rack/request_handler.rb:96:in `process_request'
+  passenger (3.0.18) lib/phusion_passenger/abstract_request_handler.rb:516:in `accept_and_process_next_request'
+  passenger (3.0.18) lib/phusion_passenger/abstract_request_handler.rb:274:in `main_loop'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:206:in `start_request_handler'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:171:in `block in handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/utils.rb:470:in `safe_fork'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:166:in `handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:357:in `server_main_loop'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:206:in `start_synchronously'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:180:in `start'
+  passenger (3.0.18) lib/phusion_passenger/rack/application_spawner.rb:129:in `start'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:253:in `block (2 levels) in spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:132:in `lookup_or_add'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:246:in `block in spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:82:in `block in synchronize'
+  <internal:prelude>:10:in `synchronize'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server_collection.rb:79:in `synchronize'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:244:in `spawn_rack_application'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:137:in `spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/spawn_manager.rb:275:in `handle_spawn_application'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:357:in `server_main_loop'
+  passenger (3.0.18) lib/phusion_passenger/abstract_server.rb:206:in `start_synchronously'
+  passenger (3.0.18) helper-scripts/passenger-spawn-server:99:in `<main>'
+
+
+  Rendered /Users/joe/.rvm/gems/ruby-1.9.3-p286/gems/actionpack-3.2.8/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/assets/application/ui-darkness/images/ui-icons_ffffff_256x240.png" for 127.0.0.1 at 2013-01-07 10:31:45 -0500
+Served asset /application/ui-darkness/images/ui-icons_ffffff_256x240.png - 304 Not Modified (2ms)
