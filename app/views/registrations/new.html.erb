@@ -46,7 +46,7 @@
                   <%= f.text_field :rate %></p>
                   
                   <p><%= f.label :distance, "Preferred Distance to Travel" %>
-                  <%= f.select :distance, options_for_select([['Miles', 0], ['10', 10], ['20', 20], ['30', 30], ['50', 50], ['100', 100]]) %> Miles</p>
+                  <%= f.select :distance, options_for_select((10..100).to_a.select{|n| n%10 == 0}) %> Miles</p>
                 </div>
 
                 <div class="submit">

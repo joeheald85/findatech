@@ -11,6 +11,11 @@
 <div id="wrapper">
 	
 	<%= render 'layouts/topbar' %>
+	
+	<% if user_signed_in? %>
+		<%= render 'layouts/nav'%>
+	<%end%>
+	
 	<div id="content" class="xgrid">
 	
 	<%= yield %>

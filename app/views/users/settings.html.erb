@@ -26,20 +26,23 @@
     <p><%= f.label :timezone %><br>
     <%= f.collection_select :timezone, ActiveSupport::TimeZone.us_zones, :name, :to_s %></p>
     
-    <% if @user.role?('tech')%>
+    <% if @user.role?('tech') %>
       <p><%= f.label :rate, "Hourly Rate $" %>
       <%= f.text_field :rate %></p>
       
       <p><%= f.label :distance, "Preferred Distance to Travel" %>
-      <%= f.select :distance, options_for_select([['Miles', 0], ['10', 10], ['20', 20], ['30', 30], ['50', 50], ['100', 100]]) %> Miles</p>
+      <%= f.select :distance, options_for_select((10..100).to_a.select{|n| n%10 == 0}) %> Miles</p>
     <% end %>
 
 	<p><%= f.label :profile_picture %><br>
     <%= f.file_field :profile_picture %></p>
 
 	<% if @user.profile_picture.present? %>
+	  <div id="current_photo">
 		<p>Current Profile Picture: <br>
 			<%= image_tag @user.profile_picture.url(:medium) %></p>
+		<p><%= link_to 'Delete Photo', '#', :id => 'delete_avatar' %></p>
+	  </div>
 	<% end %>
 
     <div class="submit">

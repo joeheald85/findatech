@@ -16,3 +16,5 @@
 //
 /// jQuery Libs
 //= require jquery/jquery.placeholder
+//
+//= require_tree ./home

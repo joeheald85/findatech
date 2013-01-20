@@ -9,8 +9,8 @@ class Ability
       can :manage, :all
     elsif user.id.present?
       can :manage, User, :id => user.id
-    else
-      can :register, User
+      can :manage, Appointment, :user_id => user.id
+      can :manage, Appointment, :tech_id => user.id
     end
   end
 end

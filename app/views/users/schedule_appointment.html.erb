@@ -1,10 +1,10 @@
-<h2>Schedule a Wurqout with <%= @guru.member_name.blank? ? @guru.username : @guru.member_name %></h2>
+<h2>Schedule an Appointment with <%= @tech.full_name %></h2>
 <input type="hidden" id="user_tz_offset" value="<%= DateTime.now.in_time_zone(current_user.timezone).strftime('%z') %>"/>
 
-<%= form_for @wurqout_session, :html => {:class => 'form-session'} do |f| %>
+<%= form_for @appointment, :html => {:class => 'form-session'} do |f| %>
 
-    <%= f.hidden_field 'guru_id', {:value => @guru.id, :id => "user_id"}  %>
-    <%= f.hidden_field 'wurqer_id', {:value => current_user.id, :id => "wurqer_id"} %>
+    <%= f.hidden_field 'tech_id', {:value => @tech.id, :id => "tech_id"}  %>
+    <%= f.hidden_field 'user_id', {:value => current_user.id, :id => "user_id"} %>
     
     <% params[:errors].each do |error| %>
         <p><%= error %></p>

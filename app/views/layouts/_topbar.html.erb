@@ -12,23 +12,20 @@
 				</li>
 				<li>
 					<%if user_signed_in?%>
-						<% user_role = current_user.role?('tech') ? 'tech' : (current_user.role?('user') ? 'user' : 'admin') %>
-						<% if user_role == 'user' %>
+						<% if current_user.role?('user') %>
 							<% @alert = Appointment.find(:all, :conditions => "status = 'unconfirmed' and user_id = #{current_user.id}")%>
-						<% elsif user_role == 'tech' %>
+						<% elsif current_user.role?('tech') %>
 							<% @alert = Appointment.find(:all, :conditions => "(status = 'rescheduled' or status = 'new') and user_id = #{current_user.id}") %>
 						<% end %>
 							
-						<%if @alert.blank?%>
-							<%= link_to "No Alerts", "/"%>
-						<%else%>
-							<%= link_to "New Alerts", "/users/appointments", :class => 'new_messeges top_alert'%>
-						<%end%>
-					<%end%>
+						<% if !@alert.blank? %>
+							<%= link_to @alert.length.to_s + " New Alert"+(@alert.many? ? 's' : ''), "/users/appointments", :class => 'new_messeges top_alert'%>
+						<% end %>
+					<% end %>
 				</li>
 					
 				<% if user_signed_in? %>
-					<li><%= link_to "Profile", settings_users_path %></li>
+					<li><%= link_to "Settings", settings_users_path %></li>
 					<li><%= link_to "Logout", destroy_user_session_path, :method => 'delete' %></li>
 				<% end %>
 			</ul>

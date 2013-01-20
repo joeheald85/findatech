@@ -13,6 +13,7 @@ Findatech::Application.routes.draw do
       post :set_availability
       post :update_availability
       post :remove_availability
+      get :search
     end
     get :availability
     put :change_photo

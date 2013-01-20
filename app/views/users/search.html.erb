@@ -1,108 +1,34 @@
 
-<% content_for :left_sidebar do %>
     <div class="widget-title"><h3 class="green">Narrow Your Results</h3></div>
     <div class="widget">
        
-        <%= form_for @user, :url => { :action => "search" }, :html => { :class => 'form-search' } do |f|%>
-            <%= label_tag nil, 'Gender preference', :class => "big" %>
-            <div class="well centered">
-                <%= f.label :gender_male, :class => 'radio inline' do %>
-                    <%= f.radio_button :gender, 'male', :checked => (params[:user] and params[:user][:gender] == 'male') %><br>Male
-                <% end %>
-                <%= f.label :gender_female, :class => 'radio inline' do %>
-                    <%= f.radio_button :gender, 'female', :checked => (params[:user] and params[:user][:gender] == 'female') %><br>Female
-                <% end %>
-                <%= f.label :gender_either, :class => 'radio inline' do %>
-                    <%= f.radio_button :gender, 'either', :checked => (params[:user] and params[:user][:gender] == 'either') %><br>Either
-                <% end %>
-            </div>
+        <%= form_tag search_users_path, :method => :get, :class => 'form-search' do |f|%>
+            <p>Within <%= select_tag 'miles', options_for_select((10..100).to_a.select{|n| n%10 == 0}) %> of ..<br></p>
+			<p><%= radio_button_tag 'location', 'saved', true, :class => 'location' %> My saved location (<%= current_user.city + ', ' + current_user.state %>)</p>
+			<p><%= radio_button_tag 'location', 'custom', false, :class => 'location' %> <%= text_field_tag 'address', nil, :placeholder => 'Address' %> 
+			<%= text_field_tag 'city', nil, :placeholder => 'City' %> <%= select_tag 'state', options_for_select(state_list) %> <%= text_field_tag 'zip', nil, :placeholder => 'Zip Code' %> </p>
 
-            <%= label_tag nil, 'Wurqout type', :class => "big" %>
-            <div class="control-group">
-                <div class="input-append">
-                    <input id="autocomplete_interest" name="user_interest" size="30" type="text" />
-                    <span class="add-on"><i class="icon-search"></i></span>
-                </div>
-                <%= link_to_add_wurqout_fields 'Add'.html_safe, f, :user_interests, :class => 'btn hide', :id => 'add_interest_button' %>
-                <div id="user_interests">
-                    <%= f.fields_for :user_interests do |uf|%>
-                        <%= render 'user_interest_fields', :f => uf %>
-                    <% end %>
-                    <% if params[:user] and params[:user][:user_interests_attributes] %>
-                       <% params[:user][:user_interests_attributes].each_with_index do |obj, index| %>
-                           <div class="fields">
-                              <input class="interest" data-id="replace_id" id="user_user_interests_attributes_<%= index %>_interest" name="user[user_interests_attributes][<%= index %>][interest]" size="30" type="text" value="<%= obj[1][:interest] %>">
-                              <label><%= obj[1][:interest] %><input id="user_user_interests_attributes_<%= index %>__destroy" name="user[user_interests_attributes][<%= index %>][_destroy]" type="hidden" value="false">
-                              <a class="btn btn-mini" href="#" onclick="remove_interest(this); return false;"><i class="icon-remove"></i></a></label>
-                           </div>
-                       <% end %>
-                    <% end %>
-                </div>
-            </div>
-    
-            <%= label_tag nil, 'Price max', :class => "big" %>
-            <div id="search_max_price" class="well">
-                <div id="max_price_slider"></div>
-                <input type="hidden" id="max_price" name="max_price"<%= ' value='+params[:max_price] if !params[:max_price].blank? %>>
-                <div class="centered value"><%= params[:max_price].blank? ? 'No limit' : '$'+params[:max_price] %></span></div>
-            </div>
-
-            <%= label_tag 'Wurqout level', nil, :class => "big" %>
-            <div class="well even">
-                <label for="wurqout_preference_beginner" class="checkbox inline">
-                    <input type="checkbox" id="wurqout_preference_beginner" name="wurqout_preference_beginner" value="true"<%= ' checked' if params[:wurqout_preference_beginner] %>> Beginner
-                </label>
-                <label for="wurqout_preference_intermediate" class="checkbox inline wider">
-                    <input type="checkbox" id="wurqout_preference_intermediate" name="wurqout_preference_intermediate" value="true"<%= ' checked' if params[:wurqout_preference_intermediate] %>> Intermediate
-                </label>
-                <label for="wurqout_preference_advanced" class="checkbox inline">
-                    <input type="checkbox" id="wurqout_preference_advanced" name="wurqout_preference_advanced" value="true"<%= ' checked' if params[:wurqout_preference_advanced] %>> Advanced
-                </label>
-                <label for="wurqout_preference_hardcore" class="checkbox inline wider">
-                    <input type="checkbox" id="wurqout_preference_hardcore" name="wurqout_preference_hardcore" value="true"<%= ' checked' if params[:wurqout_preference_hardcore] %>> Hardcore
-                </label>
-            </div>
-    
-            <input type="hidden" name="search_type" value="<%=@search_type%>">
             <div class="centered">
-                <%= f.submit 'Search', :class => 'btn btn-green' %>
+                <%= submit_tag 'Search', :class => 'btn btn-green' %>
             </div>
     
         <% end %>
      </div>
 
-<% end %>
-
-<% if !@results.nil? %>
+<% if !@techs.blank? %>
     <ul id="search_results" class="unstyled">
-        <% @results.each do |u| %>
+        <% @techs.each do |u| %>
             <li>
                 <%= image_tag u.profile_picture.url(:medium), :class => 'user-photo' %>
-                <h4><%= link_to ((u.member_name.present? ? u.member_name : u.username) + ' &raquo;').html_safe, user_profile_path(u) %></h4>
-                <% if u.user_interests.present? %>
-                    <p class="interests"><strong>Interests:</strong> <%= u.user_interests.map(&:interest).join(', ') %></p>
-                <% end %>
-                <% if u.role?('guru') %>
-                    <%= link_to 'Schedule a Wurqout', user_schedule_wurqout_path(u), :class => 'btn btn-blue schedule' %>
-                    <dl class="rates">
-                        <dt>Rates:</dt>
-                        <% if u.guru_pricing_tier1_enabled %>
-                            <dd><strong>15min</strong> - <%= number_to_currency(u.guru_pricing_tier1, :precision => 0) %></dd>
-                        <% end %>
-                        <% if u.guru_pricing_tier2_enabled %>
-                            <dd><strong>30min</strong> - <%= number_to_currency(u.guru_pricing_tier2, :precision => 0) %></dd>
-                        <% end %>
-                        <% if u.guru_pricing_tier3_enabled %>
-                            <dd><strong>60min</strong> - <%= number_to_currency(u.guru_pricing_tier3, :precision => 0) %></dd>
-                        <% end %>
-                    </dl>
-                <% else %>
-                    <%= link_to 'Request a Wurqout', new_cowurq_session_path(:user_id => u.id), :class => 'btn btn-blue schedule' %>
-                <% end %>
+                <h4><%= link_to (u.full_name + ' &raquo;').html_safe, user_profile_path(u) %></h4>
+                <dl class="rate">
+                    <dt>Rate :</dt>
+                </dl>
+                <%= link_to 'Schedule an Appointment', schedule_appointment_users_path(:tech_id => u.id), :class => 'btn' %>
             </li>
         <% end %>
     </ul>
-    <%= will_paginate @results, :renderer => BootstrapPagination::Rails %>
-<% else %>
-    <p>There are no results that matched your query. Please try again.</p>
+    <%= will_paginate @techs, :renderer => BootstrapPagination::Rails %>
+<% elsif !params[:address].nil? %>
+    <p>There are currently no techs in your area.</p>
 <% end %>
